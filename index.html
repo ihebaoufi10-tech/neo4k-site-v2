@@ -82,16 +82,16 @@
         .cta:hover{opacity:0.9; transform:scale(1.02);}
 
         .trial-section{background:var(--surface-2); padding:60px 0; margin-top:80px; border-radius:24px; text-align:center;}
-        .trial-form{max-width:400px; margin:30px auto; display:flex; gap:10px;}
+        .trial-form{max-width:500px; margin:30px auto; display:flex; flex-direction:column; gap:15px; padding: 0 20px;}
         .trial-form input{
-            flex:1; padding:12px 16px; border-radius:8px; border:1px solid var(--border);
-            background:var(--bg); color:white;
+            width: 100%; padding:14px 16px; border-radius:8px; border:1px solid var(--border);
+            background:var(--bg); color:white; font-size: 15px;
         }
-        .trial-btn{padding:12px 24px; border-radius:8px; background:white; color:black; font-weight:600; cursor:pointer;}
+        .trial-btn{padding:16px 24px; border-radius:8px; background:white; color:black; font-weight:700; cursor:pointer; border:none; transition: .2s;}
+        .trial-btn:hover{background: var(--cyan); transform: scale(1.02);}
 
         @media(max-width:768px){
             .hero h1{font-size:32px;}
-            .trial-form{flex-direction:column;}
         }
     </style>
 </head>
@@ -167,12 +167,13 @@
 
     <section id="test" class="trial-section">
         <h2>Essai Gratuit 24h</h2>
-        <p>Testez la qualité de nos services gratuitement pendant 24 heures.</p>
+        <p>Entrez vos coordonnées pour recevoir votre test sur WhatsApp.</p>
         <div class="trial-form">
-            <input type="email" id="trial-email" placeholder="Votre adresse email">
-            <button class="trial-btn" id="trial-btn" onclick="requestTrial()">Demander mon test</button>
+            <input type="email" id="trial-email" placeholder="Votre adresse email" required>
+            <input type="tel" id="trial-whatsapp" placeholder="Votre numéro WhatsApp (ex: +33...)" required>
+            <button class="trial-btn" id="trial-btn" onclick="requestTrial()">Demander mon test 24h</button>
         </div>
-        <p id="trial-status" style="display:none; margin-top:20px;"></p>
+        <p id="trial-status" style="display:none; margin-top:20px; font-weight: 600;"></p>
     </section>
 </div>
 
@@ -183,13 +184,16 @@
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
             const planId = btn.getAttribute('data-plan');
+            const whatsapp = prompt("Veuillez entrer votre numéro WhatsApp pour recevoir l'abonnement :");
+            if (!whatsapp) return;
+
             const originalText = btn.textContent;
             btn.textContent = "Chargement...";
             try {
                 const res = await fetch(`${BACKEND_URL}/create-checkout-session`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ planId })
+                    body: JSON.stringify({ planId, whatsapp })
                 });
                 const data = await res.json();
                 if (data.url) {
@@ -207,27 +211,34 @@
 
     async function requestTrial() {
         const email = document.getElementById('trial-email').value;
+        const whatsapp = document.getElementById('trial-whatsapp').value;
         const btn = document.getElementById('trial-btn');
         const status = document.getElementById('trial-status');
+
         if (!email || !email.includes('@')) return alert("Email invalide");
+        if (!whatsapp || whatsapp.length < 8) return alert("Numéro WhatsApp invalide");
+
         btn.disabled = true;
-        btn.textContent = "Envoi...";
+        btn.textContent = "Envoi en cours...";
+
         try {
             const res = await fetch(`${BACKEND_URL}/request-trial`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email, whatsapp })
             });
             if (res.ok) {
                 status.style.display = "block";
-                status.textContent = "✅ Demande envoyée ! Vérifiez vos emails.";
+                status.style.color = "#2DD4A7";
+                status.textContent = "✅ Demande envoyée ! Nous vous contacterons sur WhatsApp.";
                 btn.style.display = "none";
                 document.getElementById('trial-email').style.display = "none";
+                document.getElementById('trial-whatsapp').style.display = "none";
             } else { throw new Error(); }
         } catch (err) {
             alert("Erreur lors de l'envoi.");
             btn.disabled = false;
-            btn.textContent = "Demander mon test";
+            btn.textContent = "Demander mon test 24h";
         }
     }
 </script>
