@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merci — Neo 4K Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D13; --surface:#121828; --border:#242C42;
+    --text:#E9EDF5; --text-dim:#8C97AE;
+    --cyan:#2DD4A7; --violet:#16A97C;
+    --grad: linear-gradient(120deg, var(--cyan), var(--violet));
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--text); font-family:'Inter',sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:24px; text-align:center;
+  }
+  .card{
+    max-width:480px; background:var(--surface); border:1px solid var(--border);
+    border-radius:20px; padding:48px 32px;
+  }
+  .icon{
+    width:72px; height:72px; margin:0 auto 24px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    font-size:34px; color:#06110F;
+  }
+  h1{font-family:'Unbounded',sans-serif; font-size:26px; margin-bottom:14px; letter-spacing:-.5px;}
+  p{color:var(--text-dim); font-size:15.5px; line-height:1.6; margin-bottom:8px;}
+  .highlight{color:var(--cyan); font-weight:600;}
+  a.btn{
+    display:inline-block; margin-top:26px; background:var(--grad); color:#06110F;
+    font-weight:700; padding:14px 28px; border-radius:10px; text-decoration:none; font-size:15px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✓</div>
+    <h1>Paiement confirmé</h1>
+    <p>Merci pour votre confiance ! Votre code d'activation vient de vous être envoyé par <span class="highlight">email</span>.</p>
+    <p>Pensez à vérifier vos courriers indésirables si vous ne le voyez pas dans quelques minutes.</p>
+    <a class="btn" href="/">Retour à l'accueil</a>
+  </div>
+</body>
+</html>
