@@ -245,6 +245,7 @@
       <a href="#tarifs">Tarifs</a>
       <a href="#faq">FAQ</a>
     </div>
+    <a href="#essai-gratuit" class="nav-cta" style="margin-right: 10px; background: var(--surface); color: var(--text); border: 1px solid var(--border);">Essai Gratuit</a>
     <a href="#tarifs" class="nav-cta">Voir les tarifs</a>
   </nav>
 </header>
@@ -445,6 +446,22 @@
   </div>
 </section>
 
+<section id="essai-gratuit" style="padding: 60px 24px; background: var(--surface); border-radius: 20px; margin: 0 auto 40px; max-width: 800px; text-align: center; border: 1px solid var(--border); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--grad);"></div>
+  <h2 style="font-family: 'Unbounded'; font-size: 28px; margin-bottom: 15px;">🎁 Essai Gratuit 24h</h2>
+  <p style="color: var(--text-dim); margin-bottom: 25px; font-size: 16px;">Testez la puissance de Neo 4K Pro gratuitement pendant 24 heures sans aucun engagement.</p>
+  
+  <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
+    <input type="email" id="trial-email" placeholder="Votre adresse email" 
+           style="padding: 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: white; font-size: 15px; outline: none; transition: border-color 0.3s;">
+    <button onclick="requestTrial()" id="trial-btn" class="btn-primary" 
+            style="border: none; cursor: pointer; width: 100%; padding: 14px; font-size: 16px;">
+          Demander mon test gratuit
+    </button>
+  </div>
+  <p id="trial-status" style="margin-top: 20px; font-size: 15px; display: none; font-weight: 500;"></p>
+</section>
+
 <section>
   <div class="final reveal">
     <h2>Prêt à explorer le catalogue ?</h2>
@@ -488,8 +505,6 @@
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
   // ---- Connexion aux boutons de paiement Stripe ----
-  // Remplacez cette URL par l'adresse publique de votre serveur backend
-  // (celui du dossier neo4k-backend), par ex. https://api.votre-domaine.com
   const BACKEND_URL = "https://neo4k-backend.onrender.com";
 
   document.querySelectorAll('.plan .cta[data-plan]').forEach(btn => {
@@ -517,7 +532,44 @@
       }
     });
   });
+
+async function requestTrial() {
+    const email = document.getElementById('trial-email').value;
+    const btn = document.getElementById('trial-btn');
+    const status = document.getElementById('trial-status');
+
+    if (!email || !email.includes('@')) {
+        return alert("Veuillez entrer une adresse email valide.");
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Envoi en cours...";
+    status.style.display = "none";
+
+    try {
+        const response = await fetch(`${BACKEND_URL}/request-trial`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, name: "Visiteur Site" })
+        });
+
+        if (response.ok) {
+            status.style.display = "block";
+            status.style.color = "#2DD4A7";
+            status.textContent = "✅ Demande envoyée ! Vous recevrez vos accès sur WhatsApp ou Email très bientôt.";
+            btn.style.display = "none";
+            document.getElementById('trial-email').style.display = "none";
+        } else {
+            throw new Error();
+        }
+    } catch (err) {
+        alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+        btn.disabled = false;
+        btn.textContent = "Demander mon test gratuit";
+    }
+}
 </script>
 
 </body>
 </html>
+
