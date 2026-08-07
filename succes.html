@@ -34,6 +34,16 @@
   a.btn{
     display:inline-block; margin-top:26px; background:var(--grad); color:#06110F;
     font-weight:700; padding:14px 28px; border-radius:10px; text-decoration:none; font-size:15px;
+    width: 100%;
+  }
+  .wa-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  }
+  .wa-btn:hover {
+    background: #20ba5a;
   }
 </style>
 </head>
@@ -41,9 +51,16 @@
   <div class="card">
     <div class="icon">✓</div>
     <h1>Paiement confirmé</h1>
-    <p>Merci pour votre confiance ! Votre code d'activation vient de vous être envoyé par <span class="highlight">email</span>.</p>
-    <p>Pensez à vérifier vos courriers indésirables si vous ne le voyez pas dans quelques minutes.</p>
-    <a class="btn" href="/">Retour à l'accueil</a>
+    <p>Merci pour votre confiance ! Votre commande est en cours de traitement.</p>
+    <p><span class="highlight">Important :</span> Cliquez sur le bouton ci-dessous pour nous envoyer votre preuve de paiement et recevoir vos accès immédiatement sur WhatsApp.</p>
+    
+    <a class="btn wa-btn" href="https://wa.me/213564653328?text=Bonjour%2C%20je%20viens%20de%20payer%20mon%20abonnement%20Streaming%20Pro.%20Voici%20mon%20email%20de%20paiement%20%3A%20">
+      Recevoir mes accès sur WhatsApp 💬
+    </a>
+    
+    <a class="btn" href="/" style="background: transparent; color: var(--text-dim); border: 1px solid var(--border); margin-top: 15px;">
+      Retour à l'accueil
+    </a>
   </div>
 </body>
 </html>
