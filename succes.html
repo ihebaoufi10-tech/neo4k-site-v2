@@ -1,66 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merci — Neo 4K Pro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0A0D13; --surface:#121828; --border:#242C42;
-    --text:#E9EDF5; --text-dim:#8C97AE;
-    --cyan:#2DD4A7; --violet:#16A97C;
-    --grad: linear-gradient(120deg, var(--cyan), var(--violet));
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{
-    background:var(--bg); color:var(--text); font-family:'Inter',sans-serif;
-    min-height:100vh; display:flex; align-items:center; justify-content:center;
-    padding:24px; text-align:center;
-  }
-  .card{
-    max-width:480px; background:var(--surface); border:1px solid var(--border);
-    border-radius:20px; padding:48px 32px;
-  }
-  .icon{
-    width:72px; height:72px; margin:0 auto 24px; border-radius:50%;
-    background:var(--grad); display:flex; align-items:center; justify-content:center;
-    font-size:34px; color:#06110F;
-  }
-  h1{font-family:'Unbounded',sans-serif; font-size:26px; margin-bottom:14px; letter-spacing:-.5px;}
-  p{color:var(--text-dim); font-size:15.5px; line-height:1.6; margin-bottom:8px;}
-  .highlight{color:var(--cyan); font-weight:600;}
-  a.btn{
-    display:inline-block; margin-top:26px; background:var(--grad); color:#06110F;
-    font-weight:700; padding:14px 28px; border-radius:10px; text-decoration:none; font-size:15px;
-    width: 100%;
-  }
-  .wa-btn {
-    background: #25D366;
-    color: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-  }
-  .wa-btn:hover {
-    background: #20ba5a;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reçu de Paiement — Neo 4K Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 24px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .receipt-box { background: white; color: #0f172a; border-radius: 16px; padding: 20px; margin: 20px 0; text-align: left; position: relative; }
+        .receipt-box::after { content: ''; position: absolute; bottom: -10px; left: 10%; right: 10%; height: 20px; background: radial-gradient(circle, transparent, transparent 50%, white 50%, white); background-size: 20px 20px; transform: rotate(180deg); }
+        .btn-whatsapp { background: #25d366; color: white; padding: 15px; border-radius: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; width: 100%; }
+        .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <div class="icon">✓</div>
-    <h1>Paiement confirmé</h1>
-    <p>Merci pour votre confiance ! Votre commande est en cours de traitement.</p>
-    <p><span class="highlight">Important :</span> Cliquez sur le bouton ci-dessous pour nous envoyer votre preuve de paiement et recevoir vos accès immédiatement sur WhatsApp.</p>
-    
-    <a class="btn wa-btn" href="https://wa.me/213564653328?text=Bonjour%2C%20je%20viens%20de%20payer%20mon%20abonnement%20Streaming%20Pro.%20Voici%20mon%20email%20de%20paiement%20%3A%20">
-      Recevoir mes accès sur WhatsApp 💬
-    </a>
-    
-    <a class="btn" href="/" style="background: transparent; color: var(--text-dim); border: 1px solid var(--border); margin-top: 15px;">
-      Retour à l'accueil
-    </a>
-  </div>
+    <div class="card">
+        <div class="text-green-500 text-5xl mb-4"><i class="fas fa-check-circle"></i></div>
+        <h1 class="text-2xl font-bold mb-2">Paiement Confirmé !</h1>
+        <p class="text-slate-400 text-sm mb-6">Merci pour votre achat. Voici votre reçu numérique :</p>
+        
+        <div class="receipt-box shadow-inner">
+            <div class="flex justify-between border-bottom border-slate-200 pb-2 mb-2">
+                <span class="text-xs font-bold text-slate-400 uppercase">Service</span>
+                <span class="text-xs font-bold text-sky-600">NEO 4K PRO</span>
+            </div>
+            <div class="mb-4">
+                <p class="text-xs text-slate-400 uppercase font-bold">Référence Transaction</p>
+                <p id="ref-id" class="font-mono text-sm break-all font-bold">Chargement...</p>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="text-sm">Plan choisi</span>
+                <span id="plan-name" class="font-bold text-sm">Streaming Pro</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="text-sm">Statut</span>
+                <span class="text-green-600 font-bold text-sm">Payé ✓</span>
+            </div>
+            <div class="border-t border-dashed border-slate-300 my-3"></div>
+            <p class="text-[10px] text-slate-400 text-center italic">Conservez cette référence pour l'activation.</p>
+        </div>
+
+        <p class="text-sm mb-6 text-slate-300">Cliquez ci-dessous pour envoyer ce reçu sur WhatsApp et recevoir vos codes immédiatement.</p>
+
+        <a id="wa-link" href="#" class="btn-whatsapp">
+            <i class="fab fa-whatsapp text-2xl"></i>
+            ENVOYER LE REÇU SUR WHATSAPP
+        </a>
+        
+        <p class="mt-6 text-[10px] text-slate-500 uppercase tracking-widest">Activation instantanée 24/7</p>
+    </div>
+
+    <script>
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id') || 'REF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        const plan = urlParams.get('plan') || 'Streaming Pro';
+
+        // Update UI
+        document.getElementById('ref-id').innerText = sessionId;
+        document.getElementById('plan-name').innerText = plan.charAt(0).toUpperCase() + plan.slice(1);
+
+        // Prepare WhatsApp Link
+        const phoneNumber = "213564653328";
+        const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Plan : ${plan}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
+        
+        document.getElementById('wa-link').href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    </script>
 </body>
 </html>
