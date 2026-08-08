@@ -27,16 +27,20 @@
                 <span class="text-xs font-bold text-slate-400 uppercase">Service</span>
                 <span class="text-xs font-bold text-sky-600">NEO 4K PRO</span>
             </div>
-            <div class="mb-4">
+            <div class="mb-3">
+                <p class="text-xs text-slate-400 uppercase font-bold">Email du client</p>
+                <p id="client-email" class="font-mono text-sm break-all font-bold text-slate-700">Chargement...</p>
+            </div>
+            <div class="mb-3">
                 <p class="text-xs text-slate-400 uppercase font-bold">Référence Transaction</p>
-                <p id="ref-id" class="font-mono text-sm break-all font-bold">Chargement...</p>
+                <p id="ref-id" class="font-mono text-xs break-all font-bold text-slate-600">Chargement...</p>
             </div>
             <div class="flex justify-between mb-2">
-                <span class="text-sm">Plan choisi</span>
-                <span id="plan-name" class="font-bold text-sm">Chargement...</span>
+                <span class="text-sm font-semibold">Plan choisi</span>
+                <span id="plan-name" class="font-bold text-sm text-sky-600">Chargement...</span>
             </div>
             <div class="flex justify-between mb-2">
-                <span class="text-sm">Statut</span>
+                <span class="text-sm font-semibold">Statut</span>
                 <span class="text-green-600 font-bold text-sm">Payé ✓</span>
             </div>
             <div class="border-t border-dashed border-slate-300 my-3"></div>
@@ -58,6 +62,9 @@
         const urlParams = new URLSearchParams(window.location.search);
         const sessionId = urlParams.get('session_id') || 'REF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         const planId = urlParams.get('plan') || 'Streaming Pro';
+        
+        // Try to get email if passed or prompt user / placeholder
+        let clientEmail = urlParams.get('email') || 'Client Stripe';
 
         // Format Plan Name for display
         let planDisplay = "Streaming Pro";
@@ -69,10 +76,11 @@
         // Update UI
         document.getElementById('ref-id').innerText = sessionId;
         document.getElementById('plan-name').innerText = planDisplay;
+        document.getElementById('client-email').innerText = clientEmail;
 
         // Prepare WhatsApp Link
         const phoneNumber = "213564653328";
-        const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
+        const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Email : ${clientEmail}\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
         
         document.getElementById('wa-link').href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     </script>
