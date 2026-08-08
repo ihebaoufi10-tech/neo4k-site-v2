@@ -33,7 +33,7 @@
             </div>
             <div class="flex justify-between mb-2">
                 <span class="text-sm">Plan choisi</span>
-                <span id="plan-name" class="font-bold text-sm">Streaming Pro</span>
+                <span id="plan-name" class="font-bold text-sm">Chargement...</span>
             </div>
             <div class="flex justify-between mb-2">
                 <span class="text-sm">Statut</span>
@@ -57,15 +57,22 @@
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
         const sessionId = urlParams.get('session_id') || 'REF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        const plan = urlParams.get('plan') || 'Streaming Pro';
+        const planId = urlParams.get('plan') || 'Streaming Pro';
+
+        // Format Plan Name for display
+        let planDisplay = "Streaming Pro";
+        if (planId === "1mois") planDisplay = "Abonnement 1 Mois";
+        else if (planId === "3mois") planDisplay = "Abonnement 3 Mois";
+        else if (planId === "6mois") planDisplay = "Abonnement 6 Mois";
+        else if (planId === "12mois") planDisplay = "Abonnement 12 Mois";
 
         // Update UI
         document.getElementById('ref-id').innerText = sessionId;
-        document.getElementById('plan-name').innerText = plan.charAt(0).toUpperCase() + plan.slice(1);
+        document.getElementById('plan-name').innerText = planDisplay;
 
         // Prepare WhatsApp Link
         const phoneNumber = "213564653328";
-        const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Plan : ${plan}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
+        const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
         
         document.getElementById('wa-link').href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     </script>
