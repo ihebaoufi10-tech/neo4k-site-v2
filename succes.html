@@ -3,71 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reçu Neo 4K Pro</title>
+    <title>Reçu de Paiement — Neo 4K Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background-color: #0f172a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { background: #1e293b; padding: 30px; border-radius: 20px; text-align: center; max-width: 400px; width: 100%; border: 1px solid #334155; }
-        .receipt { background: white; color: #0f172a; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: left; }
-        .btn-wa { background: #25d366; color: white; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; display: block; cursor: pointer; border: none; text-decoration: none; }
-        .input-email { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #e2e8f0; margin-top: 5px; color: #0f172a; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 24px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .receipt-box { background: white; color: #0f172a; border-radius: 16px; padding: 20px; margin: 20px 0; text-align: left; position: relative; }
+        .receipt-box::after { content: ''; position: absolute; bottom: -10px; left: 10%; right: 10%; height: 20px; background: radial-gradient(circle, transparent, transparent 50%, white 50%, white); background-size: 20px 20px; transform: rotate(180deg); }
+        .btn-whatsapp { background: #25d366; color: white; padding: 15px; border-radius: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; width: 100%; border: none; cursor: pointer; }
+        .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        .input-email { background: #1e293b; border: 1px solid #334155; color: white; padding: 10px; border-radius: 8px; width: 100%; margin-top: 5px; font-size: 14px; outline: none; }
+        .input-email:focus { border-color: #38bdf8; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1 class="text-2xl font-bold text-green-500 mb-4">Paiement Réussi !</h1>
-        <div class="receipt">
-            <p style="font-size: 12px; color: #64748b; font-weight: bold;">EMAIL DU CLIENT :</p>
-            <input type="email" id="userEmail" class="input-email" placeholder="Votre email ici...">
-            
-            <div style="margin-top: 15px;">
-                <p style="font-size: 12px; color: #64748b; font-weight: bold;">RÉFÉRENCE :</p>
-                <p id="refId" style="font-family: monospace; font-size: 12px; word-break: break-all;"></p>
+        <div class="text-green-500 text-5xl mb-4"><i class="fas fa-check-circle"></i></div>
+        <h1 class="text-2xl font-bold mb-2">Paiement Confirmé !</h1>
+        <p class="text-slate-400 text-sm mb-6">Merci pour votre achat. Voici votre reçu numérique :</p>
+        
+        <div class="receipt-box shadow-inner">
+            <div class="flex justify-between border-bottom border-slate-200 pb-2 mb-2">
+                <span class="text-xs font-bold text-slate-400 uppercase">Service</span>
+                <span class="text-xs font-bold text-sky-600">NEO 4K PRO</span>
             </div>
-            
-            <div style="margin-top: 15px;">
-                <p style="font-size: 12px; color: #64748b; font-weight: bold;">PLAN :</p>
-                <p id="planName" style="font-weight: bold; color: #0284c7;"></p>
+            <div class="mb-3">
+                <p class="text-xs text-slate-400 uppercase font-bold">Email du client</p>
+                <p id="display-email" class="font-mono text-sm break-all font-bold text-slate-700">Chargement...</p>
+                <div id="email-input-container" class="hidden">
+                    <input type="email" id="input-email" class="input-email" placeholder="Entrez votre email ici...">
+                </div>
             </div>
+            <div class="mb-3">
+                <p class="text-xs text-slate-400 uppercase font-bold">Référence Transaction</p>
+                <p id="ref-id" class="font-mono text-xs break-all font-bold text-slate-600">Chargement...</p>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="text-sm font-semibold">Plan choisi</span>
+                <span id="plan-name" class="font-bold text-sm text-sky-600">Chargement...</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="text-sm font-semibold">Statut</span>
+                <span class="text-green-600 font-bold text-sm">Payé ✓</span>
+            </div>
+            <div class="border-t border-dashed border-slate-300 my-3"></div>
+            <p class="text-[10px] text-slate-400 text-center italic">Conservez cette référence pour l'activation.</p>
         </div>
-        <button onclick="sendToWhatsApp()" class="btn-wa">ENVOYER SUR WHATSAPP</button>
+
+        <div id="instruction-text" class="text-sm mb-6 text-slate-300">
+            Cliquez ci-dessous pour envoyer ce reçu sur WhatsApp et recevoir vos codes immédiatement.
+        </div>
+
+        <button id="wa-btn" class="btn-whatsapp">
+            <i class="fab fa-whatsapp text-2xl"></i>
+            ENVOYER LE REÇU SUR WHATSAPP
+        </button>
+        
+        <p class="mt-6 text-[10px] text-slate-500 uppercase tracking-widest">Activation instantanée 24/7</p>
     </div>
 
     <script>
-        // استخراج البيانات من الرابط
-        var params = new URLSearchParams(window.location.search);
-        var session = params.get('session_id') || "REF-" + Math.floor(Math.random()*1000000);
-        var plan = params.get('plan') || "1mois";
-        var email = params.get('email') || "";
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id') || 'REF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        const planId = urlParams.get('plan') || '1mois';
+        let clientEmail = urlParams.get('email');
 
-        // عرض البيانات
-        document.getElementById('refId').innerText = session;
-        document.getElementById('planName').innerText = "Abonnement " + plan;
-        if(email && email !== "Client Stripe") {
-            document.getElementById('userEmail').value = email;
+        const phoneNumber = "213564653328";
+        
+        // Format Plan Name
+        const plans = {
+            "1mois": "Abonnement 1 Mois",
+            "3mois": "Abonnement 3 Mois",
+            "6mois": "Abonnement 6 Mois",
+            "12mois": "Abonnement 12 Mois"
+        };
+        const planDisplay = plans[planId] || "Abonnement Neo 4K Pro";
+
+        // Update UI
+        document.getElementById('ref-id').innerText = sessionId;
+        document.getElementById('plan-name').innerText = planDisplay;
+
+        if (clientEmail && clientEmail !== 'Client Stripe') {
+            document.getElementById('display-email').innerText = clientEmail;
+        } else {
+            document.getElementById('display-email').classList.add('hidden');
+            document.getElementById('email-input-container').classList.remove('hidden');
+            document.getElementById('instruction-text').innerText = "Veuillez entrer votre email pour générer votre reçu et recevoir vos codes.";
         }
 
-        function sendToWhatsApp() {
-            var inputEmail = document.getElementById('userEmail').value.trim();
-            if(!inputEmail || inputEmail.indexOf('@') === -1) {
+        function sendWhatsApp() {
+            const email = clientEmail || document.getElementById('input-email').value;
+            if (!email || !email.includes('@')) {
                 alert("Veuillez entrer un email valide.");
                 return;
             }
 
-            // بناء الرسالة بطريقة بسيطة جداً
-            var text = "Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n" +
-                       "*REÇU DE PAIEMENT*\n" +
-                       "Email : " + inputEmail + "\n" +
-                       "Plan : " + plan + "\n" +
-                       "Référence : " + session + "\n\n" +
-                       "Merci de m'envoyer mes codes d'accès.";
-
-            var waUrl = "https://wa.me/213564653328?text=" + encodeURIComponent(text);
-            window.location.href = waUrl;
+            const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Email : ${email}\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
+            
+            window.location.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         }
+
+        document.getElementById('wa-btn').addEventListener('click', sendWhatsApp);
     </script>
 </body>
 </html>
-
-
-
