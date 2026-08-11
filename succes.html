@@ -12,8 +12,10 @@
         .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 24px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         .receipt-box { background: white; color: #0f172a; border-radius: 16px; padding: 20px; margin: 20px 0; text-align: left; position: relative; }
         .receipt-box::after { content: ''; position: absolute; bottom: -10px; left: 10%; right: 10%; height: 20px; background: radial-gradient(circle, transparent, transparent 50%, white 50%, white); background-size: 20px 20px; transform: rotate(180deg); }
-        .btn-whatsapp { background: #25d366; color: white; padding: 15px; border-radius: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; width: 100%; }
+        .btn-whatsapp { background: #25d366; color: white; padding: 15px; border-radius: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; width: 100%; border: none; cursor: pointer; }
         .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        .input-email { background: #1e293b; border: 1px solid #334155; color: white; padding: 10px; border-radius: 8px; width: 100%; margin-top: 5px; font-size: 14px; outline: none; }
+        .input-email:focus { border-color: #38bdf8; }
     </style>
 </head>
 <body>
@@ -29,7 +31,10 @@
             </div>
             <div class="mb-3">
                 <p class="text-xs text-slate-400 uppercase font-bold">Email du client</p>
-                <p id="client-email" class="font-mono text-sm break-all font-bold text-slate-700">Chargement...</p>
+                <p id="display-email" class="font-mono text-sm break-all font-bold text-slate-700">Chargement...</p>
+                <div id="email-input-container" class="hidden">
+                    <input type="email" id="input-email" class="input-email" placeholder="Entrez votre email ici...">
+                </div>
             </div>
             <div class="mb-3">
                 <p class="text-xs text-slate-400 uppercase font-bold">Référence Transaction</p>
@@ -47,42 +52,60 @@
             <p class="text-[10px] text-slate-400 text-center italic">Conservez cette référence pour l'activation.</p>
         </div>
 
-        <p class="text-sm mb-6 text-slate-300">Cliquez ci-dessous pour envoyer ce reçu sur WhatsApp et recevoir vos codes immédiatement.</p>
+        <div id="instruction-text" class="text-sm mb-6 text-slate-300">
+            Cliquez ci-dessous pour envoyer ce reçu sur WhatsApp et recevoir vos codes immédiatement.
+        </div>
 
-        <a id="wa-link" href="#" class="btn-whatsapp">
+        <button id="wa-btn" class="btn-whatsapp">
             <i class="fab fa-whatsapp text-2xl"></i>
             ENVOYER LE REÇU SUR WHATSAPP
-        </a>
+        </button>
         
         <p class="mt-6 text-[10px] text-slate-500 uppercase tracking-widest">Activation instantanée 24/7</p>
     </div>
 
     <script>
-        // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
         const sessionId = urlParams.get('session_id') || 'REF-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        const planId = urlParams.get('plan') || 'Streaming Pro';
-        
-        // Try to get email if passed or prompt user / placeholder
-        let clientEmail = urlParams.get('email') || 'Client Stripe';
+        const planId = urlParams.get('plan') || '1mois';
+        let clientEmail = urlParams.get('email');
 
-        // Format Plan Name for display
-        let planDisplay = "Streaming Pro";
-        if (planId === "1mois") planDisplay = "Abonnement 1 Mois";
-        else if (planId === "3mois") planDisplay = "Abonnement 3 Mois";
-        else if (planId === "6mois") planDisplay = "Abonnement 6 Mois";
-        else if (planId === "12mois") planDisplay = "Abonnement 12 Mois";
+        const phoneNumber = "213564653328";
+        
+        // Format Plan Name
+        const plans = {
+            "1mois": "Abonnement 1 Mois",
+            "3mois": "Abonnement 3 Mois",
+            "6mois": "Abonnement 6 Mois",
+            "12mois": "Abonnement 12 Mois"
+        };
+        const planDisplay = plans[planId] || "Abonnement Neo 4K Pro";
 
         // Update UI
         document.getElementById('ref-id').innerText = sessionId;
         document.getElementById('plan-name').innerText = planDisplay;
-        document.getElementById('client-email').innerText = clientEmail;
 
-        // Prepare WhatsApp Link
-        const phoneNumber = "213564653328";
-        const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Email : ${clientEmail}\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
-        
-        document.getElementById('wa-link').href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        if (clientEmail && clientEmail !== 'Client Stripe') {
+            document.getElementById('display-email').innerText = clientEmail;
+        } else {
+            document.getElementById('display-email').classList.add('hidden');
+            document.getElementById('email-input-container').classList.remove('hidden');
+            document.getElementById('instruction-text').innerText = "Veuillez entrer votre email pour générer votre reçu et recevoir vos codes.";
+        }
+
+        function sendWhatsApp() {
+            const email = clientEmail || document.getElementById('input-email').value;
+            if (!email || !email.includes('@')) {
+                alert("Veuillez entrer un email valide.");
+                return;
+            }
+
+            const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Email : ${email}\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
+            
+            window.location.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        }
+
+        document.getElementById('wa-btn').addEventListener('click', sendWhatsApp);
     </script>
 </body>
 </html>
