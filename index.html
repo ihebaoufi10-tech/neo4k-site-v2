@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; }
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; scroll-behavior: smooth; }
         .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
         .card:hover { transform: translateY(-10px); border-color: #38bdf8; }
@@ -21,7 +21,6 @@
         <div class="text-2xl font-bold gradient-text">Neo 4K Pro</div>
         <nav class="hidden md:flex space-x-8">
             <a href="#plans" class="hover:text-sky-400 transition">Tarifs</a>
-            <a href="#features" class="hover:text-sky-400 transition">Avantages</a>
             <a href="https://wa.me/213564653328?text=Bonjour%2C%20je%20souhaite%20un%20essai%20gratuit" class="bg-sky-500 hover:bg-sky-600 px-6 py-2 rounded-full font-semibold transition">Essai Gratuit</a>
         </nav>
     </header>
@@ -103,7 +102,6 @@
         <p>&copy; 2026 Neo 4K Pro. Tous droits réservés.</p>
         <div class="mt-4 flex justify-center space-x-6">
             <a href="https://wa.me/213564653328" class="hover:text-white transition">Contact WhatsApp</a>
-            <a href="#" class="hover:text-white transition">Mentions Légales</a>
         </div>
     </footer>
 
@@ -115,7 +113,8 @@
                 btn.innerText = "Chargement...";
                 btn.disabled = true;
 
-                const response = await fetch('https://neo4k-final.onrender.com/create-checkout-session', {
+                // الرابط المصلح للاتصال بالسيرفر الجديد
+                const response = await fetch('https://neo4k-backend.onrender.com/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ planId })
@@ -131,7 +130,7 @@
                 }
             } catch (err) {
                 console.error(err);
-                alert("Erreur de connexion au serveur.");
+                alert("Erreur de connexion au serveur. Veuillez réessayer.");
                 btn.innerText = "Commander";
                 btn.disabled = false;
             }
@@ -139,3 +138,4 @@
     </script>
 </body>
 </html>
+
