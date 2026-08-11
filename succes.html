@@ -14,8 +14,8 @@
         .receipt-box::after { content: ''; position: absolute; bottom: -10px; left: 10%; right: 10%; height: 20px; background: radial-gradient(circle, transparent, transparent 50%, white 50%, white); background-size: 20px 20px; transform: rotate(180deg); }
         .btn-whatsapp { background: #25d366; color: white; padding: 15px; border-radius: 12px; font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; width: 100%; border: none; cursor: pointer; }
         .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
-        .input-email { background: #1e293b; border: 1px solid #334155; color: white; padding: 10px; border-radius: 8px; width: 100%; margin-top: 5px; font-size: 14px; outline: none; }
-        .input-email:focus { border-color: #38bdf8; }
+        .input-email { background: #f1f5f9; border: 2px solid #e2e8f0; color: #0f172a; padding: 12px; border-radius: 12px; width: 100%; margin-top: 5px; font-size: 15px; outline: none; font-weight: 600; }
+        .input-email:focus { border-color: #38bdf8; background: white; }
     </style>
 </head>
 <body>
@@ -53,7 +53,7 @@
         </div>
 
         <div id="instruction-text" class="text-sm mb-6 text-slate-300">
-            Cliquez ci-dessous pour envoyer ce reçu sur WhatsApp et recevoir vos codes immédiatement.
+            Cliqueز ci-dessous pour envoyer ce reçu sur WhatsApp.
         </div>
 
         <button id="wa-btn" class="btn-whatsapp">
@@ -72,7 +72,6 @@
 
         const phoneNumber = "213564653328";
         
-        // Format Plan Name
         const plans = {
             "1mois": "Abonnement 1 Mois",
             "3mois": "Abonnement 3 Mois",
@@ -81,31 +80,35 @@
         };
         const planDisplay = plans[planId] || "Abonnement Neo 4K Pro";
 
-        // Update UI
         document.getElementById('ref-id').innerText = sessionId;
         document.getElementById('plan-name').innerText = planDisplay;
 
-        if (clientEmail && clientEmail !== 'Client Stripe') {
+        // Check if email is valid or generic
+        if (clientEmail && clientEmail.includes('@') && clientEmail !== 'Client Stripe') {
             document.getElementById('display-email').innerText = clientEmail;
         } else {
             document.getElementById('display-email').classList.add('hidden');
             document.getElementById('email-input-container').classList.remove('hidden');
-            document.getElementById('instruction-text').innerText = "Veuillez entrer votre email pour générer votre reçu et recevoir vos codes.";
+            document.getElementById('instruction-text').innerText = "Veuillez entrer votre email pour générer votre reçu.";
         }
 
         function sendWhatsApp() {
-            const email = clientEmail || document.getElementById('input-email').value;
+            let email = clientEmail;
+            // If original email is missing or generic, take from input
+            if (!email || !email.includes('@') || email === 'Client Stripe') {
+                email = document.getElementById('input-email').value;
+            }
+
             if (!email || !email.includes('@')) {
                 alert("Veuillez entrer un email valide.");
                 return;
             }
 
-            const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Email : ${email}\n🔹 Plan : ${planDisplay}\n🔹 Référence : ${sessionId}\n━━━━━━━━━━━━━━━\nMerci de m'envoyer mes codes d'accès.`;
-            
-            window.location.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            const message = `Bonjour, je viens de payer mon abonnement Neo 4K Pro.\n\n📄 *REÇU DE PAIEMENT*\n━━━━━━━━━━━━━━━\n🔹 Email : <LaTex>{email}\n🔹 Plan :</LaTex>{planDisplay}\n🔹 Référence : <LaTex>{sessionId}\n━━━━━━━━━━━━━━━\nMerci de م'envoyer mes codes d'accès.`;                          window.location.href = `https://wa.me/</LaTex>{phoneNumber}?text=${encodeURIComponent(message)}`;
         }
 
         document.getElementById('wa-btn').addEventListener('click', sendWhatsApp);
     </script>
 </body>
 </html>
+
