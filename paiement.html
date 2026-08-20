@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo 4K Pro — Paiement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAvlPLOarWb86NJfR1GJDu8lgb1TjUmSWlFK8DTRZp5CpgmvCHB0WAHW-ygmxYK20UNovG0mGqvMXJyx0&currency=EUR&intent=capture"></script>
+    <style>
+        :root {
+            --bg: #09090b;
+            --surface: #18181b;
+            --surface-2: #27272a;
+            --primary: #FACC15;
+            --primary-hover: #EAB308;
+            --text: #FFFFFF;
+            --text-dim: #A1A1AA;
+            --border: #3F3F46;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        .payment-container {
+            max-width: 500px;
+            width: 95%;
+            margin: 40px auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; text-align: center; margin-bottom: 30px; }
+        
+        .payment-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px 25px;
+        }
+        
+        .plan-title { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .plan-price { font-size: 36px; font-weight: 800; margin-bottom: 20px; }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-dim); }
+        .form-group input { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font-size: 15px; outline: none; transition: .2s; }
+        .form-group input:focus { border-color: var(--primary); }
+        .form-group input::placeholder { color: #71717a; }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background: var(--primary);
+            color: #000;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+            margin-top: 10px;
+        }
+        .submit-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        
+        .payment-loader { text-align: center; color: var(--text-dim); font-size: 14px; margin-top: 15px; display: none; }
+        .payment-loader.active { display: block; }
+        
+        #paypal-button-container { margin-top: 20px; }
+        
+        .back-link {
+            display: inline-block;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 15px;
+            transition: .2s;
+        }
+        .back-link:hover { color: var(--primary); }
+        
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+        
+        footer { text-align: center; padding: 20px; color: var(--text-dim); font-size: 13px; border-top: 1px solid var(--border); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="logo">NEO 4K PRO</div>
+        <div class="payment-card">
+            <div class="plan-title" id="planTitle">Plan choisi</div>
+            <div class="plan-price" id="planPrice">—</div>
+            
+            <div class="form-group">
+                <label for="clientEmail">Email *</label>
+                <input type="email" id="clientEmail" placeholder="votre@email.com" required>
+            </div>
+            <div class="form-group">
+                <label for="clientWhatsapp">WhatsApp (optionnel)</label>
+                <input type="tel" id="clientWhatsapp" placeholder="+213 5XX XXX XXX">
+            </div>
+            
+            <button class="submit-btn" onclick="startPayment()" id="payBtn">
+                Payer avec PayPal
+            </button>
+            
+            <div class="payment-loader" id="paymentLoader">⏳ Préparation du paiement...</div>
+            <div id="paypal-button-container"></div>
+            
+            <a href="https://neo4k-site-v2.onrender.com" class="back-link">← Retour aux tarifs</a>
+        </div>
+        
+        <div class="secure-badge">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            Paiement sécurisé via PayPal
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Neo 4K Pro. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const BACKEND_URL = "https://neo4k-final.onrender.com";
+        let currentPlanId = '';
+        let currentPlanLabel = '';
+        let currentOrderId = '';
+
+        // Get plan from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        currentPlanId = urlParams.get('plan') || '';
+        currentPlanLabel = urlParams.get('label') || '';
+
+        // Set plan info
+        if (currentPlanLabel) {
+            document.getElementById('planTitle').textContent = currentPlanLabel;
+        }
+        
+        const planPrices = { '1mois': '10 €', '3mois': '20 €', '6mois': '30 €', '12mois': '45 €' };
+        document.getElementById('planPrice').textContent = planPrices[currentPlanId] || '—';
+
+        let buttonsRendered = false;
+
+        function startPayment() {
+            const email = document.getElementById('clientEmail').value.trim();
+            if (!email) {
+                alert("Veuillez entrer votre email.");
+                return;
+            }
+            if (!currentPlanId) {
+                alert("Aucun plan sélectionné. Retournez à la page des tarifs.");
+                return;
+            }
+            
+            document.getElementById('payBtn').style.display = 'none';
+            document.getElementById('paymentLoader').classList.add('active');
+            
+            if (!buttonsRendered) {
+                renderPayPalButtons();
+            }
+        }
+
+        function renderPayPalButtons() {
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'pill',
+                    label: 'paypal',
+                    height: 50,
+                },
+                createOrder: async function(data, actions) {
+                    const email = document.getElementById('clientEmail').value.trim();
+                    const whatsapp = document.getElementById('clientWhatsapp').value.trim();
+                    document.getElementById('paymentLoader').classList.add('active');
+                    try {
+                        const res = await fetch(`${BACKEND_URL}/create-paypal-order`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ planId: currentPlanId, email, whatsapp })
+                        });
+                        const order = await res.json();
+                        if (order.error) {
+                            alert("Erreur: " + order.error);
+                            document.getElementById('paymentLoader').classList.remove('active');
+                            throw new Error(order.error);
+                        }
+                        currentOrderId = order.id;
+                        return order.id;
+                    } catch (err) {
+                        document.getElementById('paymentLoader').classList.remove('active');
+                        throw err;
+                    }
+                },
+                onApprove: async function(data, actions) {
+                    try {
+                        const res = await fetch(`${BACKEND_URL}/capture-paypal-order/${data.orderID}`, {
+                            method: 'POST',
+                        });
+                        const order = await res.json();
+                        document.getElementById('paymentLoader').classList.remove('active');
+                        if (order.status === 'COMPLETED') {
+                            const msg = encodeURIComponent(
+                                `Bonjour, j'ai payé mon abonnement Neo 4K Pro.\n` +
+                                `Plan: ${currentPlanLabel}\n` +
+                                `Référence PayPal: ${data.orderID}\n` +
+                                `Veuillez m'envoyer mon code d'accès.`
+                            );
+                            window.open(`https://wa.me/213564653328?text=${msg}`, '_blank');
+                            document.getElementById('paypal-button-container').innerHTML = 
+                                '<p style="color: #4ade80; font-size: 16px; font-weight: 600; text-align: center; margin-top: 15px;">✅ Paiement réussi ! Redirection vers WhatsApp...</p>';
+                        } else {
+                            alert("Le paiement n'a pas pu être finalisé. Veuillez réessayer.");
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        alert("Erreur lors de la validation du paiement.");
+                        document.getElementById('paymentLoader').classList.remove('active');
+                    }
+                },
+                onError: function(err) {
+                    console.error('PayPal Error:', err);
+                    document.getElementById('paymentLoader').classList.remove('active');
+                    alert("Une erreur est survenue avec PayPal. Veuillez réessayer.");
+                },
+                onCancel: function() {
+                    document.getElementById('paymentLoader').classList.remove('active');
+                }
+            }).render('#paypal-button-container');
+            buttonsRendered = true;
+        }
+    </script>
+</body>
+</html>
