@@ -3,231 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo4k Pro | أفضل تجربة ترفيهية في الجزائر</title>
+    <title>Neo4k Pro | تجربة سينمائية لا مثيل لها</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-        body { font-family: 'Cairo', sans-serif; background-color: #09090b; color: #ffffff; scroll-behavior: smooth; }
-        .text-gold { color: #FACC15; }
-        .bg-gold { background-color: #FACC15; }
-        .border-gold { border-color: #FACC15; }
-        .card-gradient { background: linear-gradient(145deg, #18181b, #09090b); border: 1px solid #27272a; transition: all 0.3s ease; }
-        .card-gradient:hover { border-color: #FACC15; transform: translateY(-5px); }
-        .btn-gold { background-color: #FACC15; color: #000; font-weight: bold; transition: all 0.3s ease; }
-        .btn-gold:hover { background-color: #eab308; transform: scale(1.05); }
-        .nav-link { position: relative; transition: color 0.3s; }
-        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #FACC15; transition: width 0.3s; }
-        .nav-link:hover::after { width: 100%; }
-        .faq-item { background: #18181b; border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-        .faq-answer { padding: 0 20px 20px; color: #a1a1aa; display: none; }
-        .faq-item.active .faq-answer { display: block; }
-        .faq-item.active .fa-chevron-down { transform: rotate(180deg); }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
+        
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --bg: #020617;
+        }
+
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: var(--bg); 
+            color: #f8fafc; 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% -20%, #312e81 0%, #020617 80%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
+        }
+
+        .card-plan {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-plan:hover {
+            transform: scale(1.03);
+            border-color: var(--primary);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .grid-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
     </style>
 </head>
-<body>
+<body class="grid-bg">
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
+    <nav class="fixed w-full z-50 glass border-b border-white/5 px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center text-black font-bold text-xl">N</div>
-                <span class="text-xl font-bold tracking-tighter">NEO4K <span class="text-gold">PRO</span></span>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-play text-white text-sm"></i>
+                </div>
+                <span class="text-2xl font-black tracking-tighter">NEO4K <span class="text-purple-400">PRO</span></span>
             </div>
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#features" class="nav-link">المميزات</a>
-                <a href="#content" class="nav-link">المحتوى</a>
-                <a href="#pricing" class="nav-link">الأسعار</a>
-                <a href="#faq" class="nav-link">الأسئلة</a>
-                <a href="https://wa.me/213771862886" class="btn-gold px-6 py-2 rounded-full text-sm">تواصل معنا</a>
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#features" class="hover:text-purple-400 transition-colors font-medium">المميزات</a>
+                <a href="#content" class="hover:text-purple-400 transition-colors font-medium">المكتبة</a>
+                <a href="#pricing" class="hover:text-purple-400 transition-colors font-medium">الاشتراكات</a>
+                <a href="https://wa.me/213771862886" class="btn-primary px-8 py-2.5 rounded-xl text-sm font-bold">تواصل معنا</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-40 pb-20 px-6 overflow-hidden min-h-screen flex items-center">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent -z-10"></div>
-        <div class="max-w-5xl mx-auto text-center">
-            <span class="inline-block px-4 py-1 bg-gold/10 text-gold rounded-full text-sm font-bold mb-6 border border-gold/20 animate-pulse">الأفضل في الجزائر والعالم العربي</span>
-            <h1 class="text-5xl md:text-8xl font-bold mb-8 leading-tight tracking-tighter">شاهد كل شيء <br><span class="text-gold">بجودة 4K حقيقية</span></h1>
-            <p class="text-gray-400 text-lg md:text-2xl mb-10 max-w-3xl mx-auto">وداعاً للتقطيع! استمتع بأكثر من 14,000 قناة و 80,000 فيلم ومسلسل مع أقوى سيرفر في السوق الجزائري.</p>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                <a href="#pricing" class="btn-gold px-12 py-5 rounded-2xl text-xl w-full md:w-auto shadow-[0_0_20px_rgba(250,204,21,0.3)]">ابدأ اشتراكك الآن</a>
-                <a href="https://wa.me/213771862886" class="bg-white/5 border border-white/10 px-12 py-5 rounded-2xl text-xl w-full md:w-auto hover:bg-white/10 transition-all flex items-center justify-center gap-3">
-                    <i class="fab fa-whatsapp text-green-500 text-2xl"></i> تواصل عبر واتساب
+    <!-- Hero -->
+    <section class="relative hero-gradient pt-48 pb-32 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 text-sm font-bold border border-purple-500/20">
+                <span class="w-2 h-2 rounded-full bg-purple-500 animate-ping"></span>
+                سيرفرات فائقة السرعة في الجزائر
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
+                ترفيه بلا حدود <br>
+                <span class="text-gradient">بجودة سينمائية</span>
+            </h1>
+            <p class="text-slate-400 text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                استمتع بمشاهدة قنواتك المفضلة وأحدث الأفلام والمسلسلات بجودة 4K حقيقية. استقرار تام، تفعيل فوري، ودعم فني جزائري 24/7.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#pricing" class="btn-primary px-12 py-5 rounded-2xl text-xl font-black w-full sm:w-auto">اشترك الآن</a>
+                <a href="https://wa.me/213771862886" class="glass px-12 py-5 rounded-2xl text-xl font-bold w-full sm:w-auto flex items-center justify-center gap-3 hover:bg-white/5 transition-all">
+                    <i class="fab fa-whatsapp text-green-400"></i> تجربة مجانية
                 </a>
             </div>
-            <div class="mt-16 flex justify-center gap-8 grayscale opacity-50">
-                <i class="fab fa-android text-4xl"></i>
-                <i class="fab fa-apple text-4xl"></i>
-                <i class="fas fa-tv text-4xl"></i>
-                <i class="fas fa-mobile-alt text-4xl"></i>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-1/2 left-10 floating opacity-20 hidden xl:block">
+            <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=200&q=80" class="w-40 rounded-3xl rotate-12">
+        </div>
+        <div class="absolute bottom-20 right-10 floating opacity-20 hidden xl:block" style="animation-delay: 1s">
+            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=200&q=80" class="w-40 rounded-3xl -rotate-12">
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-10 rounded-[3rem] border-white/5">
+                <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fas fa-bolt text-purple-500 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4">سرعة خارقة</h3>
+                <p class="text-slate-400 leading-relaxed">تكنولوجيا H.265 المتطورة تضمن لك بثاً مستقراً حتى مع سرعات الإنترنت المنخفضة في الجزائر.</p>
+            </div>
+            <div class="glass p-10 rounded-[3rem] border-white/5">
+                <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fas fa-tv text-blue-500 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4">محتوى شامل</h3>
+                <p class="text-slate-400 leading-relaxed">أكثر من 15,000 قناة عالمية و 100,000 فيلم ومسلسل يتم تحديثها يومياً بأعلى الجودات.</p>
+            </div>
+            <div class="glass p-10 rounded-[3rem] border-white/5">
+                <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fas fa-headset text-emerald-500 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4">دعم فني دائم</h3>
+                <p class="text-slate-400 leading-relaxed">فريقنا الجزائري متواجد على مدار الساعة لمساعدتك في التفعيل وحل أي مشكلة تواجهك.</p>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-12 bg-gold text-black">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <div class="text-4xl font-bold">14K+</div>
-                <div class="text-sm font-bold opacity-70">قناة مباشرة</div>
+    <!-- Content Grid -->
+    <section id="content" class="py-32 bg-black/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">مكتبة لا تنتهي</h2>
+                    <p class="text-slate-400 text-lg">شاهد كل ما تحب من منصاتك العالمية المفضلة في مكان واحد.</p>
+                </div>
+                <div class="flex gap-4">
+                    <span class="glass px-6 py-2 rounded-full text-sm font-bold">4K Ultra HD</span>
+                    <span class="glass px-6 py-2 rounded-full text-sm font-bold">Multi-Subtitles</span>
+                </div>
             </div>
-            <div>
-                <div class="text-4xl font-bold">65K+</div>
-                <div class="text-sm font-bold opacity-70">فيلم وبرنامج</div>
-            </div>
-            <div>
-                <div class="text-4xl font-bold">15K+</div>
-                <div class="text-sm font-bold opacity-70">مسلسل مترجم</div>
-            </div>
-            <div>
-                <div class="text-4xl font-bold">4.5K+</div>
-                <div class="text-sm font-bold opacity-70">عميل سعيد</div>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-6 right-6 font-black text-xl">دراما</div>
+                </div>
+                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
+                    <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-6 right-6 font-black text-xl">رياضة</div>
+                </div>
+                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-6 right-6 font-black text-xl">أطفال</div>
+                </div>
+                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
+                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-6 right-6 font-black text-xl">أكشن</div>
+                </div>
+                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass lg:flex hidden">
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-6 right-6 font-black text-xl">وثائقي</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Content Preview Section -->
-    <section id="content" class="py-24 px-6">
+    <!-- Pricing -->
+    <section id="pricing" class="py-32 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">محتوى لا محدود لكل العائلة</h2>
-                <p class="text-gray-400">جميع المنصات العالمية والقنوات الرياضية في اشتراك واحد</p>
+            <div class="text-center mb-24">
+                <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tighter">باقات تناسب الجميع</h2>
+                <p class="text-slate-400 text-xl">اختر خطتك الآن وابدأ المشاهدة في دقائق</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="relative group overflow-hidden rounded-2xl aspect-[2/3]">
-                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=500&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 right-4 font-bold">أفلام الأكشن</div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Plan 1 -->
+                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-white/5">
+                    <div class="text-purple-400 font-bold mb-4">باقة الشهر</div>
+                    <div class="text-5xl font-black mb-8">700 <span class="text-lg font-normal text-slate-500">دج</span></div>
+                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> كل القنوات + الأفلام</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> جودة 4K / UHD</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> تفعيل فوري</li>
+                    </ul>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%20شهر%20واحد" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
-                <div class="relative group overflow-hidden rounded-2xl aspect-[2/3]">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 right-4 font-bold">الدراما</div>
+                
+                <!-- Plan 2 -->
+                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-white/5">
+                    <div class="text-blue-400 font-bold mb-4">باقة 3 أشهر</div>
+                    <div class="text-5xl font-black mb-8">1500 <span class="text-lg font-normal text-slate-500">دج</span></div>
+                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> كل القنوات + الأفلام</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> جودة 4K / UHD</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> توفير 600 دج</li>
+                    </ul>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%203%20أشهر" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
-                <div class="relative group overflow-hidden rounded-2xl aspect-[2/3]">
-                    <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=500&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 right-4 font-bold">الرياضة</div>
-                </div>
-                <div class="relative group overflow-hidden rounded-2xl aspect-[2/3]">
-                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=500&q=80" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 right-4 font-bold">الوثائقيات</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-24 px-6 bg-[#0c0c0e]">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold mb-4">باقات الاشتراك</h2>
-                <p class="text-gray-400">تفعيل فوري ودعم فني متواصل</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- 1 Month -->
-                <div class="card-gradient p-10 rounded-[2.5rem] flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4">شهر واحد</h3>
-                    <div class="text-5xl font-bold text-gold mb-8">700 <span class="text-xl">دج</span></div>
-                    <ul class="text-gray-400 space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> كل القنوات والأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> جودة 4K / Ultra HD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> دعم فني 24/7</li>
+                <!-- Plan 3 (Featured) -->
+                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-purple-500/50 relative scale-105 shadow-2xl shadow-purple-500/10">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase">الأكثر طلباً</div>
+                    <div class="text-purple-400 font-bold mb-4">باقة 6 أشهر</div>
+                    <div class="text-5xl font-black mb-8 text-white">2500 <span class="text-lg font-normal text-slate-500">دج</span></div>
+                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> كل القنوات + الأفلام</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> جودة 4K / UHD</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> توفير 1700 دج</li>
                     </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%20شهر%20واحد" class="btn-gold py-4 rounded-2xl text-center text-lg">اطلب الآن</a>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%206%20أشهر" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
-                <!-- 3 Months -->
-                <div class="card-gradient p-10 rounded-[2.5rem] flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4">3 أشهر</h3>
-                    <div class="text-5xl font-bold text-gold mb-8">1500 <span class="text-xl">دج</span></div>
-                    <ul class="text-gray-400 space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> كل القنوات والأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> جودة 4K / Ultra HD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> توفير 300 دج</li>
-                    </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%203%20أشهر" class="btn-gold py-4 rounded-2xl text-center text-lg">اطلب الآن</a>
-                </div>
-                <!-- 6 Months -->
-                <div class="card-gradient p-10 rounded-[2.5rem] flex flex-col relative scale-105 border-gold shadow-[0_0_50px_rgba(250,204,21,0.15)]">
-                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest">الأكثر طلباً</div>
-                    <h3 class="text-2xl font-bold mb-4">6 أشهر</h3>
-                    <div class="text-5xl font-bold text-gold mb-8">2500 <span class="text-xl">دج</span></div>
-                    <ul class="text-gray-400 space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> كل القنوات والأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> جودة 4K / Ultra HD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> توفير 1000 دج</li>
-                    </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%206%20أشهر" class="btn-gold py-4 rounded-2xl text-center text-lg">اطلب الآن</a>
-                </div>
-                <!-- 12 Months -->
-                <div class="card-gradient p-10 rounded-[2.5rem] flex flex-col">
-                    <h3 class="text-2xl font-bold mb-4">12 شهر</h3>
-                    <div class="text-5xl font-bold text-gold mb-8">3700 <span class="text-xl">دج</span></div>
-                    <ul class="text-gray-400 space-y-4 mb-10 flex-grow">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> كل القنوات والأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> جودة 4K / Ultra HD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> أفضل قيمة مقابل السعر</li>
-                    </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%2012%20شهر" class="btn-gold py-4 rounded-2xl text-center text-lg">اطلب الآن</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-6">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">الأسئلة الشائعة</h2>
-                <p class="text-gray-400">كل ما تريد معرفته عن الخدمة</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">كيف يتم التفعيل؟ <i class="fas fa-chevron-down text-gold"></i></div>
-                    <div class="faq-answer">بعد إرسال الوصل عبر الواتساب، سيقوم فريقنا بإرسال بيانات الاشتراك وشرح طريقة التشغيل خلال دقائق.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">هل يعمل خارج الجزائر؟ <i class="fas fa-chevron-down text-gold"></i></div>
-                    <div class="faq-answer">نعم، اشتراك Neo4k Pro يعمل في جميع دول العالم وبدون الحاجة لـ VPN.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">ما هي الأجهزة المدعومة؟ <i class="fas fa-chevron-down text-gold"></i></div>
-                    <div class="faq-answer">يعمل على جميع الأجهزة: Smart TV (Samsung, LG, Sony), Android TV Box, Firestick, هواتف Android و iPhone, والحواسيب.</div>
+                <!-- Plan 4 -->
+                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-white/5">
+                    <div class="text-emerald-400 font-bold mb-4">باقة 12 شهر</div>
+                    <div class="text-5xl font-black mb-8">3700 <span class="text-lg font-normal text-slate-500">دج</span></div>
+                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> كل القنوات + الأفلام</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> جودة 4K / UHD</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> أفضل قيمة اقتصادية</li>
+                    </ul>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%2012%20شهر" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 px-6 border-t border-white/10 bg-black">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+    <footer class="py-20 px-6 border-t border-white/5 glass mt-32">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-right">
             <div>
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center text-black font-bold text-xl">N</div>
-                    <span class="text-2xl font-bold tracking-tighter">NEO4K <span class="text-gold">PRO</span></span>
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-play text-white text-sm"></i>
+                    </div>
+                    <span class="text-3xl font-black tracking-tighter">NEO4K <span class="text-purple-400">PRO</span></span>
                 </div>
-                <p class="text-gray-500">أقوى اشتراك في الجزائر لعام 2026.</p>
+                <p class="text-slate-500 max-w-sm">أفضل تجربة ترفيهية في الجزائر. جودة، ثبات، وسعر لا يقاوم.</p>
             </div>
-            <div class="flex gap-8">
-                <a href="https://wa.me/213771862886" class="text-gray-400 hover:text-gold transition-colors text-3xl"><i class="fab fa-whatsapp"></i></a>
-                <a href="tel:+213771862886" class="text-gray-400 hover:text-gold transition-colors text-3xl"><i class="fas fa-phone"></i></a>
+            
+            <div class="flex flex-col gap-6">
+                <div class="flex gap-6 justify-center md:justify-end">
+                    <a href="https://wa.me/213771862886" class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:text-purple-400 transition-all"><i class="fab fa-whatsapp text-2xl"></i></a>
+                    <a href="tel:+213771862886" class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:text-purple-400 transition-all"><i class="fas fa-phone text-2xl"></i></a>
+                </div>
+                <div class="text-slate-600 text-sm font-bold">© 2026 NEO4K PRO. جميع الحقوق محفوظة.</div>
             </div>
-        </div>
-        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-gray-600 text-sm">
-            © 2026 Neo4k Pro Premium. جميع الحقوق محفوظة.
         </div>
     </footer>
-
-    <script>
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.addEventListener('click', () => {
-                const item = q.parentElement;
-                item.classList.toggle('active');
-            });
-        });
-    </script>
 </body>
 </html>
