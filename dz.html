@@ -74,6 +74,17 @@
             background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
         }
+
+        .copy-success {
+            animation: fadeInOut 2s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body class="grid-bg">
@@ -87,9 +98,10 @@
                 <span class="text-2xl font-black tracking-tighter">NEO4K <span class="text-purple-400">PRO</span></span>
             </div>
             <div class="hidden lg:flex items-center gap-10">
-                <a href="#features" class="hover:text-purple-400 transition-colors font-medium">المميزات</a>
-                <a href="#content" class="hover:text-purple-400 transition-colors font-medium">المكتبة</a>
-                <a href="#pricing" class="hover:text-purple-400 transition-colors font-medium">الاشتراكات</a>
+                <a href="#features" class="hover:text-purple-400 transition-colors font-medium text-sm">المميزات</a>
+                <a href="#content" class="hover:text-purple-400 transition-colors font-medium text-sm">المكتبة</a>
+                <a href="#pricing" class="hover:text-purple-400 transition-colors font-medium text-sm">الاشتراكات</a>
+                <a href="#payment" class="hover:text-purple-400 transition-colors font-medium text-sm">طرق الدفع</a>
                 <a href="https://wa.me/213771862886" class="btn-primary px-8 py-2.5 rounded-xl text-sm font-bold">تواصل معنا</a>
             </div>
         </div>
@@ -116,14 +128,6 @@
                 </a>
             </div>
         </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-1/2 left-10 floating opacity-20 hidden xl:block">
-            <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=200&q=80" class="w-40 rounded-3xl rotate-12">
-        </div>
-        <div class="absolute bottom-20 right-10 floating opacity-20 hidden xl:block" style="animation-delay: 1s">
-            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=200&q=80" class="w-40 rounded-3xl -rotate-12">
-        </div>
     </section>
 
     <!-- Features -->
@@ -141,7 +145,7 @@
                     <i class="fas fa-tv text-blue-500 text-2xl"></i>
                 </div>
                 <h3 class="text-2xl font-black mb-4">محتوى شامل</h3>
-                <p class="text-slate-400 leading-relaxed">أكثر من 15,000 قناة عالمية و 100,000 فيلم ومسلسل يتم تحديثها يومياً بأعلى الجودات.</p>
+                <p class="text-slate-400 leading-relaxed">أكثر من 14,000 قناة عالمية و 100,000 فيلم ومسلسل يتم تحديثها يومياً بأعلى الجودات.</p>
             </div>
             <div class="glass p-10 rounded-[3rem] border-white/5">
                 <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-8">
@@ -149,50 +153,6 @@
                 </div>
                 <h3 class="text-2xl font-black mb-4">دعم فني دائم</h3>
                 <p class="text-slate-400 leading-relaxed">فريقنا الجزائري متواجد على مدار الساعة لمساعدتك في التفعيل وحل أي مشكلة تواجهك.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Grid -->
-    <section id="content" class="py-32 bg-black/30">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">مكتبة لا تنتهي</h2>
-                    <p class="text-slate-400 text-lg">شاهد كل ما تحب من منصاتك العالمية المفضلة في مكان واحد.</p>
-                </div>
-                <div class="flex gap-4">
-                    <span class="glass px-6 py-2 rounded-full text-sm font-bold">4K Ultra HD</span>
-                    <span class="glass px-6 py-2 rounded-full text-sm font-bold">Multi-Subtitles</span>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 lg:grid-cols-5 gap-6">
-                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 right-6 font-black text-xl">دراما</div>
-                </div>
-                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
-                    <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 right-6 font-black text-xl">رياضة</div>
-                </div>
-                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
-                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 right-6 font-black text-xl">أطفال</div>
-                </div>
-                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass">
-                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 right-6 font-black text-xl">أكشن</div>
-                </div>
-                <div class="group relative aspect-[2/3] rounded-3xl overflow-hidden glass lg:flex hidden">
-                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-6 right-6 font-black text-xl">وثائقي</div>
-                </div>
             </div>
         </div>
     </section>
@@ -215,7 +175,7 @@
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> جودة 4K / UHD</li>
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> تفعيل فوري</li>
                     </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%20شهر%20واحد" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
                 
                 <!-- Plan 2 -->
@@ -227,7 +187,7 @@
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> جودة 4K / UHD</li>
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> توفير 600 دج</li>
                     </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%203%20أشهر" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
 
                 <!-- Plan 3 (Featured) -->
@@ -240,7 +200,7 @@
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> جودة 4K / UHD</li>
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> توفير 1700 دج</li>
                     </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%206%20أشهر" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
                 </div>
 
                 <!-- Plan 4 -->
@@ -252,7 +212,91 @@
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> جودة 4K / UHD</li>
                         <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> أفضل قيمة اقتصادية</li>
                     </ul>
-                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%2012%20شهر" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment" class="py-32 px-6 bg-black/40 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tighter">طرق الدفع المتوفرة</h2>
+                <p class="text-slate-400 text-lg">اختر الطريقة التي تناسبك وقم بإرسال وصل الدفع عبر الواتساب</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- BaridiMob -->
+                <div class="glass p-8 rounded-[2.5rem] border-white/10 relative group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-yellow-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">BaridiMob</h4>
+                            <p class="text-sm text-slate-500">الدفع عبر تطبيق بريدي موب</p>
+                        </div>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-2xl border border-white/5 mb-6 flex justify-between items-center">
+                        <span class="font-mono text-lg tracking-wider text-yellow-500" id="baridi-num">00799999002901882567</span>
+                        <button onclick="copyText('00799999002901882567', this)" class="text-slate-400 hover:text-white transition-colors p-2">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="text-slate-400 text-sm">
+                        <i class="fas fa-user text-xs ml-2"></i> المستفيد: <span class="text-white font-bold">Iheb Aoufi</span>
+                    </div>
+                </div>
+
+                <!-- CCP -->
+                <div class="glass p-8 rounded-[2.5rem] border-white/10 relative group">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-university text-blue-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">CCP</h4>
+                            <p class="text-sm text-slate-500">الدفع عبر البريد الجزائري</p>
+                        </div>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-2xl border border-white/5 mb-6 flex justify-between items-center">
+                        <span class="font-mono text-lg tracking-wider text-blue-500" id="ccp-num">002901882567</span>
+                        <button onclick="copyText('002901882567', this)" class="text-slate-400 hover:text-white transition-colors p-2">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="text-slate-400 text-sm">
+                        <i class="fas fa-user text-xs ml-2"></i> المستفيد: <span class="text-white font-bold">Iheb Aoufi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="https://wa.me/213771862886?text=لقد%20قمت%20بالدفع،%20إليك%20وصل%20التحويل" class="btn-primary px-12 py-5 rounded-2xl text-xl font-black inline-flex items-center gap-4">
+                    <i class="fas fa-paper-plane"></i> إرسال الوصل عبر الواتساب
+                </a>
+                <p class="mt-6 text-slate-500 text-sm">سيتم تفعيل اشتراكك فور تأكيد العملية (عادةً خلال 5-15 دقيقة)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-32 px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-black text-center mb-16 tracking-tighter">الأسئلة الشائعة</h2>
+            <div class="space-y-6">
+                <div class="glass p-6 rounded-3xl border-white/5">
+                    <h4 class="font-bold text-lg mb-2">كيف يتم التفعيل؟</h4>
+                    <p class="text-slate-400">بمجرد إرسال وصل الدفع عبر الواتساب، سيقوم فريقنا بتزويدك ببيانات الدخول وشرح طريقة التشغيل على جهازك.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl border-white/5">
+                    <h4 class="font-bold text-lg mb-2">هل يعمل خارج الجزائر؟</h4>
+                    <p class="text-slate-400">نعم، اشتراك Neo4k Pro يعمل في جميع أنحاء العالم وبدون الحاجة لـ VPN.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl border-white/5">
+                    <h4 class="font-bold text-lg mb-2">ما هي الأجهزة المدعومة؟</h4>
+                    <p class="text-slate-400">جميع الشاشات الذكية (Samsung, LG, Sony)، أجهزة Android TV Box، هواتف Android و iPhone، وأجهزة الكمبيوتر.</p>
                 </div>
             </div>
         </div>
@@ -280,5 +324,24 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalContent = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check text-green-500"></i>';
+                
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 glass px-6 py-3 rounded-2xl font-bold text-sm copy-success z-[100] border-green-500/30 text-green-400';
+                toast.innerHTML = '<i class="fas fa-check-circle ml-2"></i> تم النسخ بنجاح';
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    toast.remove();
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
