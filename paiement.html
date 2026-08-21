@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo 4K Pro — Paiement</title>
+    <title>Neo 4K Pro — Paiement Sécurisé</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         :root {
             --bg: #09090b;
@@ -16,7 +17,6 @@
             --text-dim: #A1A1AA;
             --border: #3F3F46;
             --green: #22c55e;
-            --green-hover: #16a34a;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
         body { background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
@@ -24,352 +24,168 @@
         .payment-container {
             max-width: 500px;
             width: 95%;
-            margin: 40px auto;
+            margin: 60px auto;
             padding: 20px;
-            flex-grow: 1;
         }
         
-        .logo { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; text-align: center; margin-bottom: 30px; }
+        .logo { font-size: 28px; font-weight: 800; color: var(--primary); text-align: center; margin-bottom: 40px; letter-spacing: -1px; }
         
         .payment-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px 25px;
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         
-        .plan-title { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
-        .plan-price { font-size: 36px; font-weight: 800; margin-bottom: 25px; }
+        .plan-info { text-align: center; margin-bottom: 30px; }
+        .plan-title { font-size: 20px; font-weight: 600; color: var(--text-dim); margin-bottom: 8px; }
+        .plan-price { font-size: 48px; font-weight: 800; color: var(--primary); }
         
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-dim); }
-        .form-group input { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font-size: 15px; outline: none; transition: .2s; }
-        .form-group input:focus { border-color: var(--primary); }
-        .form-group input::placeholder { color: #71717a; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--text-dim); }
+        .form-group input { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font-size: 16px; outline: none; transition: 0.3s; }
+        .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.1); }
         
         .submit-btn {
             width: 100%;
-            padding: 16px;
-            border-radius: 12px;
+            padding: 18px;
+            border-radius: 14px;
             border: none;
             background: var(--primary);
             color: #000;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 800;
             cursor: pointer;
-            transition: .2s;
+            transition: 0.3s;
             margin-top: 10px;
-        }
-        .submit-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
-        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        
-        /* IBAN Payment Info Card */
-        .iban-card {
-            display: none;
-            background: var(--surface-2);
-            border: 2px solid var(--primary);
-            border-radius: 16px;
-            padding: 25px;
-            margin-top: 20px;
-            animation: slideIn 0.3s ease;
-        }
-        .iban-card.visible { display: block; }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .iban-header {
-            text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .iban-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .iban-row:last-child { border-bottom: none; }
-        
-        .iban-label {
-            font-size: 13px;
-            color: var(--text-dim);
-            font-weight: 500;
-        }
-        
-        .iban-value {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-            text-align: right;
-            word-break: break-all;
-            max-width: 60%;
-        }
-        
-        .iban-amount {
-            font-size: 28px !important;
-            font-weight: 800 !important;
-            color: var(--primary) !important;
-        }
-        
-        .copy-btn {
-            background: none;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-left: 8px;
-            transition: .2s;
-        }
-        .copy-btn:hover { background: var(--primary); color: #000; }
-        
-        .whatsapp-btn {
-            width: 100%;
-            padding: 18px;
-            border-radius: 12px;
-            border: none;
-            background: var(--green);
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: .2s;
-            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            text-decoration: none;
         }
-        .whatsapp-btn:hover { background: var(--green-hover); transform: translateY(-1px); }
+        .submit-btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         
-        .payment-instructions {
-            background: rgba(250, 204, 21, 0.05);
-            border: 1px solid rgba(250, 204, 21, 0.2);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-dim);
-            line-height: 1.8;
-        }
-        .payment-instructions strong { color: var(--primary); }
-        
-        .payment-loader { text-align: center; color: var(--text-dim); font-size: 14px; margin-top: 15px; display: none; }
-        .payment-loader.active { display: block; }
-        
-        .back-link {
-            display: inline-block;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 14px;
-            margin-top: 15px;
-            transition: .2s;
-        }
-        .back-link:hover { color: var(--primary); }
-        
-        .secure-badge {
+        .secure-notice {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 20px;
+            margin-top: 25px;
             color: var(--text-dim);
             font-size: 13px;
         }
         
-        footer { text-align: center; padding: 20px; color: var(--text-dim); font-size: 13px; border-top: 1px solid var(--border); margin-top: 20px; }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .back-link:hover { color: var(--primary); }
+
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #000;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        footer { text-align: center; padding: 40px 20px; color: var(--text-dim); font-size: 13px; }
     </style>
 </head>
 <body>
     <div class="payment-container">
         <div class="logo">NEO 4K PRO</div>
         <div class="payment-card">
-            <div class="plan-title" id="planTitle">Plan choisi</div>
-            <div class="plan-price" id="planPrice">—</div>
-            
-            <!-- Form -->
-            <div id="paymentForm">
-                <div class="form-group">
-                    <label for="clientEmail">Email *</label>
-                    <input type="email" id="clientEmail" placeholder="votre@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="clientWhatsapp">WhatsApp *</label>
-                    <input type="tel" id="clientWhatsapp" placeholder="+213 5XX XXX XXX">
-                </div>
-                
-                <button class="submit-btn" onclick="createOrder()" id="payBtn">
-                    Commander et payer
-                </button>
+            <div class="plan-info">
+                <div class="plan-title" id="planTitle">Chargement...</div>
+                <div class="plan-price" id="planPrice">—</div>
             </div>
             
-            <div class="payment-loader" id="paymentLoader">⏳ Création de la commande...</div>
-            
-            <!-- IBAN Payment Info (shown after order creation) -->
-            <div class="iban-card" id="ibanCard">
-                <div class="iban-header">💳 Instructions de paiement</div>
-                
-                <div class="iban-row">
-                    <span class="iban-label">Montant à payer</span>
-                    <span class="iban-value iban-amount" id="ibanAmount">—</span>
-                </div>
-                
-                <div class="iban-row">
-                    <span class="iban-label">IBAN</span>
-                    <span class="iban-value">
-                        <span id="ibanValue">—</span>
-                        <button class="copy-btn" onclick="copyIBAN()">Copier</button>
-                    </span>
-                </div>
-                
-                <div class="iban-row">
-                    <span class="iban-label">Bénéficiaire</span>
-                    <span class="iban-value" id="ibanBeneficiary">—</span>
-                </div>
-                
-                <div class="iban-row">
-                    <span class="iban-label">Banque</span>
-                    <span class="iban-value" id="ibanBank">—</span>
-                </div>
-                
-                <div class="iban-row">
-                    <span class="iban-label">Référence</span>
-                    <span class="iban-value" id="ibanRef">—</span>
-                </div>
-                
-                <div class="payment-instructions">
-                    <strong>Comment payer :</strong><br>
-                    1. Effectuez un virement SEPA depuis votre compte bancaire<br>
-                    2. Indiquez la référence dans le champ "Communication"<br>
-                    3. Prenez une capture d'écran du virement<br>
-                    4. Envoyez la preuve sur WhatsApp ci-dessous
-                </div>
-                
-                <a class="whatsapp-btn" id="whatsappBtn" href="#" target="_blank">
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                    J'ai payé - Envoyer la preuve
-                </a>
+            <div class="form-group">
+                <label>Votre Email</label>
+                <input type="email" id="email" placeholder="exemple@gmail.com" required>
+            </div>
+            <div class="form-group">
+                <label>Numéro WhatsApp</label>
+                <input type="tel" id="whatsapp" placeholder="+213 5XX XXX XXX" required>
             </div>
             
-            <a href="https://neo4k-site-v2.onrender.com" class="back-link">← Retour aux tarifs</a>
-        </div>
-        
-        <div class="secure-badge">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-            Paiement sécurisé par virement bancaire SEPA
+            <button class="submit-btn" id="payBtn" onclick="handlePayment()">
+                <span id="btnText">Payer par Carte</span>
+                <div class="loader" id="loader"></div>
+            </button>
+            
+            <div class="secure-notice">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+                Paiement 100% sécurisé par Stripe
+            </div>
+            
+            <a href="index.html" class="back-link">← Retour aux offres</a>
         </div>
     </div>
     
     <footer>
-        <p>&copy; 2026 Neo 4K Pro. Tous droits réservés.</p>
+        &copy; 2026 Neo 4K Pro — Service Premium Digital
     </footer>
 
     <script>
+        const stripe = Stripe('pk_live_51U0IKgFi4Tntcp2QpXqBoXC313ozanl3UhH9ymftnuXfhiJnsvKca7ind4AIt6uS9xU04VMiSZ9KRQ3H9GEArjcH00lNVkClzk');
         const BACKEND_URL = "https://neo4k-final.onrender.com";
-        const WHATSAPP_NUMBER = "213564653328";
-        let currentPlanId = '';
-        let currentPlanLabel = '';
-        let orderData = null;
-
-        // Get plan from URL params
-        const urlParams = new URLSearchParams(window.location.search);
-        currentPlanId = urlParams.get('plan') || '';
-        currentPlanLabel = urlParams.get('label') || '';
-
-        // Set plan info
-        if (currentPlanLabel) {
-            document.getElementById('planTitle').textContent = currentPlanLabel;
-        }
         
-        const planPrices = { '1mois': '10 €', '3mois': '20 €', '6mois': '30 €', '12mois': '45 €' };
-        document.getElementById('planPrice').textContent = planPrices[currentPlanId] || '—';
+        const urlParams = new URLSearchParams(window.location.search);
+        const planId = urlParams.get('plan');
+        const planLabel = urlParams.get('label');
+        const prices = { '1mois': '10€', '3mois': '20€', '6mois': '30€', '12mois': '45€' };
 
-        async function createOrder() {
-            const email = document.getElementById('clientEmail').value.trim();
-            const whatsapp = document.getElementById('clientWhatsapp').value.trim();
+        if (planId && prices[planId]) {
+            document.getElementById('planTitle').textContent = planLabel || "Votre abonnement";
+            document.getElementById('planPrice').textContent = prices[planId];
+        }
+
+        async function handlePayment() {
+            const email = document.getElementById('email').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
             
-            if (!email || !email.includes('@')) {
-                alert("Veuillez entrer votre email.");
-                return;
-            }
-            if (!whatsapp || whatsapp.length < 8) {
-                alert("Veuillez entrer votre numéro WhatsApp.");
-                return;
-            }
-            if (!currentPlanId) {
-                alert("Aucun plan sélectionné. Retournez à la page des tarifs.");
-                return;
-            }
-            
-            document.getElementById('payBtn').disabled = true;
-            document.getElementById('paymentLoader').classList.add('active');
-            
+            if (!email || !email.includes('@')) return alert("Veuillez entrer un email valide.");
+            if (!whatsapp) return alert("Veuillez entrer votre numéro WhatsApp.");
+
+            const btn = document.getElementById('payBtn');
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('loader');
+
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            loader.style.display = 'block';
+
             try {
-                const res = await fetch(`${BACKEND_URL}/create-bank-order`, {
+                const response = await fetch(`${BACKEND_URL}/create-checkout-session`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ planId: currentPlanId, email, whatsapp })
+                    body: JSON.stringify({ planId, email, whatsapp })
                 });
-                const data = await res.json();
                 
-                if (data.error) {
-                    alert("Erreur: " + data.error);
-                    document.getElementById('payBtn').disabled = false;
-                    document.getElementById('paymentLoader').classList.remove('active');
-                    return;
+                const session = await response.json();
+                if (session.url) {
+                    window.location.href = session.url;
+                } else {
+                    throw new Error(session.error || "Erreur lors de la création de la session");
                 }
-                
-                orderData = data;
-                
-                // Show IBAN card
-                document.getElementById('paymentForm').style.display = 'none';
-                document.getElementById('ibanCard').classList.add('visible');
-                document.getElementById('paymentLoader').classList.remove('active');
-                
-                // Fill IBAN info
-                document.getElementById('ibanAmount').textContent = `${data.amount} ${data.currency}`;
-                document.getElementById('ibanValue').textContent = data.iban;
-                document.getElementById('ibanBeneficiary').textContent = data.beneficiary;
-                document.getElementById('ibanBank').textContent = data.bank;
-                document.getElementById('ibanRef').textContent = data.ref;
-                
-                // Generate WhatsApp message
-                const waMessage = encodeURIComponent(
-                    `Bonjour Neo 4K Pro,\n` +
-                    `J'ai commandé : ${currentPlanLabel}\n` +
-                    `Montant : ${data.amount} ${data.currency}\n` +
-                    `Référence : ${data.ref}\n` +
-                    `Email : ${email}\n` +
-                    `Je vous envoie la preuve de virement.`
-                );
-                document.getElementById('whatsappBtn').href = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
-                
             } catch (err) {
-                console.error(err);
-                alert("Erreur lors de la création de la commande. Veuillez réessayer.");
-                document.getElementById('payBtn').disabled = false;
-                document.getElementById('paymentLoader').classList.remove('active');
+                alert("Erreur : " + err.message);
+                btn.disabled = false;
+                btnText.style.display = 'block';
+                loader.style.display = 'none';
             }
-        }
-
-        function copyIBAN() {
-            const iban = document.getElementById('ibanValue').textContent;
-            navigator.clipboard.writeText(iban).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Copié!';
-                setTimeout(() => btn.textContent = 'Copier', 2000);
-            });
         }
     </script>
 </body>
