@@ -3,341 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo4k Pro | تجربة سينمائية لا مثيل لها</title>
+    <title>Neo4k Pro | الدليل الشامل للاشتراك والتفعيل في الجزائر</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
         
         :root {
-            --primary: #8b5cf6;
-            --secondary: #3b82f6;
-            --accent: #10b981;
-            --bg: #020617;
+            --primary: #fbbf24; /* Amber 400 - Soft Gold */
+            --bg-deep: #0f172a; /* Slate 950 */
+            --bg-card: #1e293b; /* Slate 800 */
+            --text-main: #f1f5f9; /* Slate 100 */
+            --text-muted: #94a3b8; /* Slate 400 */
         }
 
         body { 
             font-family: 'Cairo', sans-serif; 
-            background-color: var(--bg); 
-            color: #f8fafc; 
+            background-color: var(--bg-deep); 
+            color: var(--text-main); 
             scroll-behavior: smooth;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .soft-glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .hero-gradient {
-            background: radial-gradient(circle at 50% -20%, #312e81 0%, #020617 80%);
+        .nav-link {
+            transition: all 0.3s ease;
+            color: var(--text-muted);
         }
 
-        .text-gradient {
-            background: linear-gradient(to right, #a78bfa, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .nav-link:hover {
+            color: var(--primary);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .btn-gold {
+            background-color: var(--primary);
+            color: #000;
+            transition: all 0.3s ease;
+            font-weight: 700;
         }
 
-        .btn-primary:hover {
+        .btn-gold:hover {
+            background-color: #f59e0b;
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
+            box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.3);
         }
 
-        .card-plan {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .card-hover {
+            transition: all 0.3s ease;
         }
 
-        .card-plan:hover {
-            transform: scale(1.03);
-            border-color: var(--primary);
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: rgba(251, 191, 36, 0.3);
         }
 
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
         }
 
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
-        .grid-bg {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
+        .copy-toast {
+            animation: slideUp 2s forwards;
         }
 
-        .copy-success {
-            animation: fadeInOut 2s forwards;
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            20% { opacity: 1; transform: translate(-50%, 0); }
+            80% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(10px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
+        .device-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
         }
     </style>
 </head>
-<body class="grid-bg">
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass border-b border-white/5 px-6 py-4">
+<body class="selection:bg-amber-500/30">
+
+    <!-- Header -->
+    <nav class="fixed w-full z-50 soft-glass px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-play text-white text-sm"></i>
-                </div>
-                <span class="text-2xl font-black tracking-tighter">NEO4K <span class="text-purple-400">PRO</span></span>
+            <a href="#" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                <span class="bg-amber-400 text-black px-2 rounded">NEO4K</span>
+                <span class="text-amber-400">PRO</span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#home" class="nav-link text-sm font-bold">الرئيسية</a>
+                <a href="#content" class="nav-link text-sm font-bold">المحتوى</a>
+                <a href="#devices" class="nav-link text-sm font-bold">الأجهزة</a>
+                <a href="#install" class="nav-link text-sm font-bold">التثبيت</a>
+                <a href="#pricing" class="nav-link text-sm font-bold">الأسعار</a>
+                <a href="#payment" class="nav-link text-sm font-bold">الدفع</a>
+                <a href="https://wa.me/213771862886" class="btn-gold px-6 py-2 rounded-lg text-sm">اشترك الآن</a>
             </div>
-            <div class="hidden lg:flex items-center gap-10">
-                <a href="#features" class="hover:text-purple-400 transition-colors font-medium text-sm">المميزات</a>
-                <a href="#content" class="hover:text-purple-400 transition-colors font-medium text-sm">المكتبة</a>
-                <a href="#pricing" class="hover:text-purple-400 transition-colors font-medium text-sm">الاشتراكات</a>
-                <a href="#payment" class="hover:text-purple-400 transition-colors font-medium text-sm">طرق الدفع</a>
-                <a href="https://wa.me/213771862886" class="btn-primary px-8 py-2.5 rounded-xl text-sm font-bold">تواصل معنا</a>
-            </div>
+            <button class="lg:hidden text-amber-400 text-2xl"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="relative hero-gradient pt-48 pb-32 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 text-sm font-bold border border-purple-500/20">
-                <span class="w-2 h-2 rounded-full bg-purple-500 animate-ping"></span>
-                سيرفرات فائقة السرعة في الجزائر
+    <!-- Hero Section -->
+    <section id="home" class="pt-40 pb-20 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h1 class="text-5xl lg:text-7xl font-black mb-8 leading-tight">
+                    استمتع بأفضل تجربة <br>
+                    <span class="text-amber-400">مشاهدة في الجزائر</span>
+                </h1>
+                <p class="text-slate-400 text-xl mb-10 max-w-xl">
+                    وداعاً للتقطيع! شاهد كل القنوات الرياضية والترفيهية، وأحدث الأفلام والمسلسلات بجودة 4K حقيقية مع دعم فني جزائري متخصص.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#pricing" class="btn-gold px-10 py-4 rounded-xl text-lg shadow-lg">ابدأ اشتراكك</a>
+                    <a href="https://wa.me/213771862886" class="bg-slate-800 hover:bg-slate-700 px-10 py-4 rounded-xl text-lg font-bold transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-green-400"></i> تجربة مجانية
+                    </a>
+                </div>
             </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
-                ترفيه بلا حدود <br>
-                <span class="text-gradient">بجودة سينمائية</span>
-            </h1>
-            <p class="text-slate-400 text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-                استمتع بمشاهدة قنواتك المفضلة وأحدث الأفلام والمسلسلات بجودة 4K حقيقية. استقرار تام، تفعيل فوري، ودعم فني جزائري 24/7.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="#pricing" class="btn-primary px-12 py-5 rounded-2xl text-xl font-black w-full sm:w-auto">اشترك الآن</a>
-                <a href="https://wa.me/213771862886" class="glass px-12 py-5 rounded-2xl text-xl font-bold w-full sm:w-auto flex items-center justify-center gap-3 hover:bg-white/5 transition-all">
-                    <i class="fab fa-whatsapp text-green-400"></i> تجربة مجانية
-                </a>
+            <div class="relative hidden lg:block">
+                <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80" alt="TV Interface" class="rounded-3xl shadow-2xl border border-white/5">
+                <div class="absolute -bottom-10 -right-10 soft-glass p-6 rounded-2xl border border-amber-400/20">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center text-black font-black text-xl">4K</div>
+                        <div>
+                            <p class="text-xs text-slate-400">جودة البث</p>
+                            <p class="font-bold">Ultra HD 2160p</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section id="features" class="py-32 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass p-10 rounded-[3rem] border-white/5">
-                <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-8">
-                    <i class="fas fa-bolt text-purple-500 text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-black mb-4">سرعة خارقة</h3>
-                <p class="text-slate-400 leading-relaxed">تكنولوجيا H.265 المتطورة تضمن لك بثاً مستقراً حتى مع سرعات الإنترنت المنخفضة في الجزائر.</p>
-            </div>
-            <div class="glass p-10 rounded-[3rem] border-white/5">
-                <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-8">
-                    <i class="fas fa-tv text-blue-500 text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-black mb-4">محتوى شامل</h3>
-                <p class="text-slate-400 leading-relaxed">أكثر من 14,000 قناة عالمية و 100,000 فيلم ومسلسل يتم تحديثها يومياً بأعلى الجودات.</p>
-            </div>
-            <div class="glass p-10 rounded-[3rem] border-white/5">
-                <div class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-8">
-                    <i class="fas fa-headset text-emerald-500 text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-black mb-4">دعم فني دائم</h3>
-                <p class="text-slate-400 leading-relaxed">فريقنا الجزائري متواجد على مدار الساعة لمساعدتك في التفعيل وحل أي مشكلة تواجهك.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="pricing" class="py-32 px-6">
+    <!-- Content Library -->
+    <section id="content" class="py-24 px-6 bg-slate-900/50">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-24">
-                <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tighter">باقات تناسب الجميع</h2>
-                <p class="text-slate-400 text-xl">اختر خطتك الآن وابدأ المشاهدة في دقائق</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Plan 1 -->
-                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-white/5">
-                    <div class="text-purple-400 font-bold mb-4">باقة الشهر</div>
-                    <div class="text-5xl font-black mb-8">700 <span class="text-lg font-normal text-slate-500">دج</span></div>
-                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> كل القنوات + الأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> جودة 4K / UHD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> تفعيل فوري</li>
-                    </ul>
-                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+            <h2 class="text-4xl font-black section-title">محتوى ضخم ومتجدد</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                <div class="soft-glass p-8 rounded-3xl text-center card-hover">
+                    <div class="text-4xl font-black text-amber-400 mb-2">+14,000</div>
+                    <div class="text-slate-400 font-bold">قناة مباشرة</div>
                 </div>
-                
-                <!-- Plan 2 -->
-                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-white/5">
-                    <div class="text-blue-400 font-bold mb-4">باقة 3 أشهر</div>
-                    <div class="text-5xl font-black mb-8">1500 <span class="text-lg font-normal text-slate-500">دج</span></div>
-                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> كل القنوات + الأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> جودة 4K / UHD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-blue-500"></i> توفير 600 دج</li>
-                    </ul>
-                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                <div class="soft-glass p-8 rounded-3xl text-center card-hover">
+                    <div class="text-4xl font-black text-amber-400 mb-2">+65,000</div>
+                    <div class="text-slate-400 font-bold">فيلم وبرنامج</div>
                 </div>
-
-                <!-- Plan 3 (Featured) -->
-                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-purple-500/50 relative scale-105 shadow-2xl shadow-purple-500/10">
-                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-purple-500 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase">الأكثر طلباً</div>
-                    <div class="text-purple-400 font-bold mb-4">باقة 6 أشهر</div>
-                    <div class="text-5xl font-black mb-8 text-white">2500 <span class="text-lg font-normal text-slate-500">دج</span></div>
-                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> كل القنوات + الأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> جودة 4K / UHD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-purple-500"></i> توفير 1700 دج</li>
-                    </ul>
-                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                <div class="soft-glass p-8 rounded-3xl text-center card-hover">
+                    <div class="text-4xl font-black text-amber-400 mb-2">+15,000</div>
+                    <div class="text-slate-400 font-bold">مسلسل مترجم</div>
                 </div>
-
-                <!-- Plan 4 -->
-                <div class="glass p-10 rounded-[3rem] card-plan flex flex-col border-white/5">
-                    <div class="text-emerald-400 font-bold mb-4">باقة 12 شهر</div>
-                    <div class="text-5xl font-black mb-8">3700 <span class="text-lg font-normal text-slate-500">دج</span></div>
-                    <ul class="space-y-5 mb-12 flex-grow text-slate-300">
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> كل القنوات + الأفلام</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> جودة 4K / UHD</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-emerald-500"></i> أفضل قيمة اقتصادية</li>
-                    </ul>
-                    <a href="#payment" class="btn-primary py-5 rounded-2xl text-center font-black">اشترك الآن</a>
+                <div class="soft-glass p-8 rounded-3xl text-center card-hover">
+                    <div class="text-4xl font-black text-amber-400 mb-2">24/7</div>
+                    <div class="text-slate-400 font-bold">تحديثات يومية</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment Section -->
-    <section id="payment" class="py-32 px-6 bg-black/40 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tighter">طرق الدفع المتوفرة</h2>
-                <p class="text-slate-400 text-lg">اختر الطريقة التي تناسبك وقم بإرسال وصل الدفع عبر الواتساب</p>
+    <!-- Installation Guide -->
+    <section id="install" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-black section-title">دليل التثبيت والتشغيل</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Android / Firestick -->
+                <div class="soft-glass p-8 rounded-3xl card-hover">
+                    <i class="fab fa-android device-icon"></i>
+                    <h3 class="text-xl font-bold mb-4">أجهزة Android & Firestick</h3>
+                    <p class="text-slate-400 text-sm mb-6">أفضل طريقة للتشغيل هي استخدام تطبيق Downloader لتحميل مشغلاتنا الخاصة.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> حمل تطبيق <b>Downloader</b></li>
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> أدخل كود التحميل الخاص بنا</li>
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> أدخل بيانات اشتراكك واستمتع</li>
+                    </ul>
+                </div>
+                <!-- Smart TV -->
+                <div class="soft-glass p-8 rounded-3xl card-hover">
+                    <i class="fas fa-tv device-icon"></i>
+                    <h3 class="text-xl font-bold mb-4">Smart TV (Samsung / LG)</h3>
+                    <p class="text-slate-400 text-sm mb-6">يمكنك التشغيل عبر تطبيقات مشهورة متوفرة في متجر الشاشة الرسمي.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> حمل تطبيق <b>IBO Player</b></li>
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> أو تطبيق <b>Smart IPTV</b></li>
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> أرسل لنا MAC Address للتفعيل</li>
+                    </ul>
+                </div>
+                <!-- iOS / Windows -->
+                <div class="soft-glass p-8 rounded-3xl card-hover">
+                    <i class="fas fa-laptop device-icon"></i>
+                    <h3 class="text-xl font-bold mb-4">iPhone / iPad / PC</h3>
+                    <p class="text-slate-400 text-sm mb-6">حلول مرنة للمشاهدة على هاتفك أو حاسوبك الشخصي أينما كنت.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> iOS: تطبيق <b>IPTV Smarters</b></li>
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> PC: برنامج <b>VLC</b> أو <b>Smarters</b></li>
+                        <li><i class="fas fa-arrow-left text-amber-400 ml-2"></i> متوافق مع جميع الأنظمة</li>
+                    </ul>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-black mb-16">باقات الاشتراك في الجزائر</h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Month -->
+                <div class="soft-glass p-8 rounded-3xl border border-white/5 flex flex-col">
+                    <div class="text-slate-400 font-bold mb-4">شهر واحد</div>
+                    <div class="text-4xl font-black text-amber-400 mb-8">700 دج</div>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%20شهر%20واحد" class="btn-gold py-3 rounded-xl mt-auto">اطلب الآن</a>
+                </div>
+                <!-- 3 Months -->
+                <div class="soft-glass p-8 rounded-3xl border border-white/5 flex flex-col">
+                    <div class="text-slate-400 font-bold mb-4">3 أشهر</div>
+                    <div class="text-4xl font-black text-amber-400 mb-8">1500 دج</div>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%203%20أشهر" class="btn-gold py-3 rounded-xl mt-auto">اطلب الآن</a>
+                </div>
+                <!-- 6 Months -->
+                <div class="soft-glass p-8 rounded-3xl border-amber-400/30 flex flex-col relative scale-105 shadow-xl">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-400 text-black px-4 py-1 rounded-full text-xs font-black">الأكثر طلباً</div>
+                    <div class="text-slate-400 font-bold mb-4">6 أشهر</div>
+                    <div class="text-4xl font-black text-amber-400 mb-8">2500 دج</div>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%206%20أشهر" class="btn-gold py-3 rounded-xl mt-auto">اطلب الآن</a>
+                </div>
+                <!-- 12 Months -->
+                <div class="soft-glass p-8 rounded-3xl border border-white/5 flex flex-col">
+                    <div class="text-slate-400 font-bold mb-4">12 شهر</div>
+                    <div class="text-4xl font-black text-amber-400 mb-8">3700 دج</div>
+                    <a href="https://wa.me/213771862886?text=أرغب%20في%20اشتراك%20سنة" class="btn-gold py-3 rounded-xl mt-auto">اطلب الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Details -->
+    <section id="payment" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black section-title">طرق الدفع المتاحة</h2>
+            <div class="grid md:grid-cols-2 gap-8">
                 <!-- BaridiMob -->
-                <div class="glass p-8 rounded-[2.5rem] border-white/10 relative group">
+                <div class="soft-glass p-8 rounded-3xl border border-white/5">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-mobile-alt text-yellow-500 text-xl"></i>
+                        <div class="w-12 h-12 bg-amber-400/10 rounded-xl flex items-center justify-center text-amber-400 text-2xl">
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-xl">BaridiMob</h4>
-                            <p class="text-sm text-slate-500">الدفع عبر تطبيق بريدي موب</p>
-                        </div>
+                        <h4 class="text-xl font-bold">بريدي موب (BaridiMob)</h4>
                     </div>
-                    <div class="bg-black/50 p-4 rounded-2xl border border-white/5 mb-6 flex justify-between items-center">
-                        <span class="font-mono text-lg tracking-wider text-yellow-500" id="baridi-num">00799999002901882567</span>
-                        <button onclick="copyText('00799999002901882567', this)" class="text-slate-400 hover:text-white transition-colors p-2">
-                            <i class="far fa-copy"></i>
-                        </button>
+                    <div class="bg-slate-950 p-4 rounded-xl flex justify-between items-center mb-4">
+                        <code class="text-amber-400 font-bold tracking-widest">00799999002901882567</code>
+                        <button onclick="copyToClipboard('00799999002901882567', this)" class="text-slate-500 hover:text-white"><i class="far fa-copy"></i></button>
                     </div>
-                    <div class="text-slate-400 text-sm">
-                        <i class="fas fa-user text-xs ml-2"></i> المستفيد: <span class="text-white font-bold">Iheb Aoufi</span>
-                    </div>
+                    <p class="text-sm text-slate-400">الاسم: <span class="text-white font-bold">Iheb Aoufi</span></p>
                 </div>
-
                 <!-- CCP -->
-                <div class="glass p-8 rounded-[2.5rem] border-white/10 relative group">
+                <div class="soft-glass p-8 rounded-3xl border border-white/5">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-university text-blue-500 text-xl"></i>
+                        <div class="w-12 h-12 bg-sky-400/10 rounded-xl flex items-center justify-center text-sky-400 text-2xl">
+                            <i class="fas fa-university"></i>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-xl">CCP</h4>
-                            <p class="text-sm text-slate-500">الدفع عبر البريد الجزائري</p>
-                        </div>
+                        <h4 class="text-xl font-bold">CCP (البريد الجزائري)</h4>
                     </div>
-                    <div class="bg-black/50 p-4 rounded-2xl border border-white/5 mb-6 flex justify-between items-center">
-                        <span class="font-mono text-lg tracking-wider text-blue-500" id="ccp-num">002901882567</span>
-                        <button onclick="copyText('002901882567', this)" class="text-slate-400 hover:text-white transition-colors p-2">
-                            <i class="far fa-copy"></i>
-                        </button>
+                    <div class="bg-slate-950 p-4 rounded-xl flex justify-between items-center mb-4">
+                        <code class="text-sky-400 font-bold tracking-widest">002901882567</code>
+                        <button onclick="copyToClipboard('002901882567', this)" class="text-slate-500 hover:text-white"><i class="far fa-copy"></i></button>
                     </div>
-                    <div class="text-slate-400 text-sm">
-                        <i class="fas fa-user text-xs ml-2"></i> المستفيد: <span class="text-white font-bold">Iheb Aoufi</span>
-                    </div>
+                    <p class="text-sm text-slate-400">الاسم: <span class="text-white font-bold">Iheb Aoufi</span></p>
                 </div>
             </div>
-
             <div class="mt-12 text-center">
-                <a href="https://wa.me/213771862886?text=لقد%20قمت%20بالدفع،%20إليك%20وصل%20التحويل" class="btn-primary px-12 py-5 rounded-2xl text-xl font-black inline-flex items-center gap-4">
-                    <i class="fas fa-paper-plane"></i> إرسال الوصل عبر الواتساب
+                <a href="https://wa.me/213771862886?text=لقد%20قمت%20بالدفع،%20إليك%20وصل%20التحويل" class="bg-green-600 hover:bg-green-700 text-white px-12 py-5 rounded-2xl text-xl font-black inline-flex items-center gap-4 transition-all shadow-xl shadow-green-600/20">
+                    <i class="fab fa-whatsapp"></i> إرسال وصل الدفع
                 </a>
-                <p class="mt-6 text-slate-500 text-sm">سيتم تفعيل اشتراكك فور تأكيد العملية (عادةً خلال 5-15 دقيقة)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="py-32 px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-black text-center mb-16 tracking-tighter">الأسئلة الشائعة</h2>
-            <div class="space-y-6">
-                <div class="glass p-6 rounded-3xl border-white/5">
-                    <h4 class="font-bold text-lg mb-2">كيف يتم التفعيل؟</h4>
-                    <p class="text-slate-400">بمجرد إرسال وصل الدفع عبر الواتساب، سيقوم فريقنا بتزويدك ببيانات الدخول وشرح طريقة التشغيل على جهازك.</p>
-                </div>
-                <div class="glass p-6 rounded-3xl border-white/5">
-                    <h4 class="font-bold text-lg mb-2">هل يعمل خارج الجزائر؟</h4>
-                    <p class="text-slate-400">نعم، اشتراك Neo4k Pro يعمل في جميع أنحاء العالم وبدون الحاجة لـ VPN.</p>
-                </div>
-                <div class="glass p-6 rounded-3xl border-white/5">
-                    <h4 class="font-bold text-lg mb-2">ما هي الأجهزة المدعومة؟</h4>
-                    <p class="text-slate-400">جميع الشاشات الذكية (Samsung, LG, Sony)، أجهزة Android TV Box، هواتف Android و iPhone، وأجهزة الكمبيوتر.</p>
-                </div>
+                <p class="mt-4 text-slate-500">يتم تفعيل الاشتراك خلال 10 دقائق من إرسال الوصل</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-20 px-6 border-t border-white/5 glass mt-32">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-right">
-            <div>
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
-                    <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-play text-white text-sm"></i>
-                    </div>
-                    <span class="text-3xl font-black tracking-tighter">NEO4K <span class="text-purple-400">PRO</span></span>
-                </div>
-                <p class="text-slate-500 max-w-sm">أفضل تجربة ترفيهية في الجزائر. جودة، ثبات، وسعر لا يقاوم.</p>
+    <footer class="py-20 px-6 border-t border-white/5 bg-slate-950">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-right">
+                <div class="text-2xl font-black mb-4">NEO4K <span class="text-amber-400">PRO</span></div>
+                <p class="text-slate-500 max-w-sm">أفضل خدمة IPTV في الجزائر. جودة 4K، ثبات تام، ودعم فني جزائري 24/7.</p>
             </div>
-            
-            <div class="flex flex-col gap-6">
-                <div class="flex gap-6 justify-center md:justify-end">
-                    <a href="https://wa.me/213771862886" class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:text-purple-400 transition-all"><i class="fab fa-whatsapp text-2xl"></i></a>
-                    <a href="tel:+213771862886" class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:text-purple-400 transition-all"><i class="fas fa-phone text-2xl"></i></a>
-                </div>
-                <div class="text-slate-600 text-sm font-bold">© 2026 NEO4K PRO. جميع الحقوق محفوظة.</div>
+            <div class="flex gap-6">
+                <a href="https://wa.me/213771862886" class="text-2xl text-slate-400 hover:text-amber-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                <a href="tel:+213771862886" class="text-2xl text-slate-400 hover:text-amber-400 transition-colors"><i class="fas fa-phone"></i></a>
             </div>
+            <div class="text-slate-600 text-sm font-bold">© 2026 NEO4K PRO DZ. جميع الحقوق محفوظة.</div>
         </div>
     </footer>
 
     <script>
-        function copyText(text, btn) {
+        function copyToClipboard(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
-                const originalContent = btn.innerHTML;
+                const originalIcon = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check text-green-500"></i>';
                 
                 const toast = document.createElement('div');
-                toast.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 glass px-6 py-3 rounded-2xl font-bold text-sm copy-success z-[100] border-green-500/30 text-green-400';
-                toast.innerHTML = '<i class="fas fa-check-circle ml-2"></i> تم النسخ بنجاح';
+                toast.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full font-bold shadow-2xl border border-white/10 z-[100] copy-toast';
+                toast.innerHTML = 'تم النسخ بنجاح';
                 document.body.appendChild(toast);
 
                 setTimeout(() => {
-                    btn.innerHTML = originalContent;
+                    btn.innerHTML = originalIcon;
                     toast.remove();
                 }, 2000);
             });
