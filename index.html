@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo 4K Pro — Streaming & Divertissement</title>
+    <title>Neo 4K Pro — Expérience Digitale Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,133 +15,117 @@
             --text: #FFFFFF;
             --text-dim: #A1A1AA;
             --border: #3F3F46;
-            --green: #25D366;
-            --green-hover: #20ba5a;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
-        body { background: var(--bg); color: var(--text); line-height: 1.6; }
-        header { background: rgba(9, 9, 11, 0.85); backdrop-filter: blur(10px); position: fixed; top: 0; left: 0; width: 100%; z-index: 100; border-bottom: 1px solid var(--border); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; transition: .2s; }
-        .nav-links a:hover { color: var(--primary); }
-        .btn-header { background: var(--primary); color: #000; padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: .2s; }
-        .btn-header:hover { background: var(--primary-hover); transform: translateY(-1px); }
-        .hero { padding: 160px 20px 80px; text-align: center; max-width: 900px; margin: 0 auto; }
-        .badge { display: inline-block; background: rgba(250, 204, 21, 0.1); color: var(--primary); padding: 6px 16px; border-radius: 50px; font-weight: 600; font-size: 14px; margin-bottom: 20px; border: 1px solid rgba(250, 204, 21, 0.2); }
-        h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
-        h1 span { color: var(--primary); }
-        p.hero-desc { font-size: clamp(16px, 2vw, 20px); color: var(--text-dim); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .pricing { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
-        .section-title { text-align: center; font-size: 36px; font-weight: 700; margin-bottom: 50px; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
-        .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 35px 30px; display: flex; flex-direction: column; position: relative; transition: .3s; }
-        .price-card.popular { border-color: var(--primary); background: linear-gradient(180deg, rgba(250, 204, 21, 0.05) 0%, var(--surface) 100%); }
-        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
-        .plan-name { font-size: 18px; font-weight: 600; color: var(--text-dim); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .plan-price { font-size: 48px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
-        .plan-price span { font-size: 18px; font-weight: 500; color: var(--text-dim); }
-        .plan-period { font-size: 14px; color: var(--primary); margin-bottom: 25px; font-weight: 600; }
-        .features-list { list-style: none; margin-bottom: 30px; flex-grow: 1; display: flex; flex-direction: column; gap: 12px; }
-        .features-list li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text-dim); }
-        .features-list li::before { content: "✓"; color: var(--primary); font-weight: 700; }
-        .cta { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: .2s; width: 100%; text-align: center; text-decoration: none; }
-        .price-card.popular .cta { background: var(--primary); color: #000; border: none; }
-        .cta:hover { background: var(--primary); color: #000; border-color: var(--primary); transform: translateY(-2px); }
-        .trial-section { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 50px 30px; margin-top: 80px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .trial-form { max-width: 450px; margin: 30px auto 0; display: flex; flex-direction: column; gap: 15px; }
-        .trial-btn { background: var(--green); color: #fff; padding: 16px; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; font-size: 16px; transition: .2s; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
-        .trial-btn:hover { background: var(--green-hover); transform: translateY(-2px); }
-        footer { text-align: center; padding: 40px 20px; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 80px; }
-
+        body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        
+        header { padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; background: rgba(9, 9, 11, 0.9); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        
+        .hero { padding: 160px 5% 80px; text-align: center; background: radial-gradient(circle at top, rgba(250, 204, 21, 0.1), transparent); }
+        .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero p { font-size: 18px; color: var(--text-dim); max-width: 600px; margin: 0 auto 40px; }
+        
+        .cta-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 16px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; font-size: 16px; }
+        .btn-primary { background: var(--primary); color: #000; }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-secondary { background: var(--surface); border: 1px solid var(--border); color: #fff; }
+        .btn-secondary:hover { background: var(--surface-2); transform: translateY(-2px); }
+        
+        .plans { padding: 80px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .plan-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px 30px; transition: 0.3s; position: relative; display: flex; flex-direction: column; }
+        .plan-card:hover { border-color: var(--primary); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .plan-card.featured { border-color: var(--primary); background: linear-gradient(180deg, var(--surface), #111); }
+        .featured-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+        
+        .plan-name { font-size: 18px; font-weight: 600; color: var(--text-dim); margin-bottom: 10px; }
+        .plan-price { font-size: 48px; font-weight: 800; margin-bottom: 25px; }
+        .plan-price span { font-size: 18px; color: var(--text-dim); font-weight: 400; }
+        
+        .features { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+        .features li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 15px; color: var(--text-dim); }
+        .features li svg { color: var(--primary); }
+        
+        .plan-btn { width: 100%; text-align: center; padding: 16px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; margin-top: auto; }
+        .plan-btn-outline { border: 1px solid var(--primary); color: var(--primary); }
+        .plan-btn-outline:hover { background: var(--primary); color: #000; }
+        .plan-btn-fill { background: var(--primary); color: #000; }
+        .plan-btn-fill:hover { background: var(--primary-hover); }
+        
+        footer { text-align: center; padding: 60px 5%; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 80px; }
+        
         @media (max-width: 768px) {
-            .nav-links { gap: 15px; }
+            .hero h1 { font-size: 48px; }
+            header { padding: 20px 5%; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="nav-container">
-            <div class="logo">NEO 4K PRO</div>
-            <div class="nav-links">
-                <a href="#plans">Tarifs</a>
-                <a href="#test">Test Gratuit</a>
-                <a href="#plans" class="btn-header">S'abonner</a>
-            </div>
-        </div>
+        <div class="logo">NEO 4K PRO</div>
+        <a href="https://wa.me/213564653328" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;">Support</a>
     </header>
 
     <section class="hero">
-        <div class="badge">⚡ Service Numérique HD & 4K</div>
-        <h1>Le Streaming <span>Nouvelle Génération</span></h1>
-        <p class="hero-desc">Accédez à l'ensemble de notre catalogue de divertissement en haute définition avec une fluidité exceptionnelle.</p>
-    </section>
-
-    <section id="plans" class="pricing">
-        <h2 class="section-title">Choisissez votre abonnement</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="plan-name">1 Mois</div>
-                <div class="plan-price">10 €</div>
-                <div class="plan-period">Accès complet</div>
-                <ul class="features-list">
-                    <li>Qualité HD / 4K / 8K</li>
-                    <li>Accès Premium & Catalogue Complet</li>
-                    <li>Support 24/7</li>
-                </ul>
-                <a class="cta" href="https://neo4k-site-v2.onrender.com/paiement.html?plan=1mois&label=Plan%201%20Mois%20—%2010%E2%82%AC">Choisir ce plan</a>
-            </div>
-            <div class="price-card">
-                <div class="plan-name">3 Mois</div>
-                <div class="plan-price">20 €</div>
-                <div class="plan-period">Soit 6.66€ / mois</div>
-                <ul class="features-list">
-                    <li>Qualité HD / 4K / 8K</li>
-                    <li>Accès Premium & Catalogue Complet</li>
-                    <li>Support 24/7</li>
-                </ul>
-                <a class="cta" href="https://neo4k-site-v2.onrender.com/paiement.html?plan=3mois&label=Plan%203%20Mois%20—%2020%E2%82%AC">Choisir ce plan</a>
-            </div>
-            <div class="price-card popular">
-                <div class="popular-badge">Populaire</div>
-                <div class="plan-name">6 Mois</div>
-                <div class="plan-price">30 €</div>
-                <div class="plan-period">Soit 5€ / mois</div>
-                <ul class="features-list">
-                    <li>Qualité HD / 4K / 8K</li>
-                    <li>Accès Premium & Catalogue Complet</li>
-                    <li>Support 24/7</li>
-                </ul>
-                <a class="cta" href="https://neo4k-site-v2.onrender.com/paiement.html?plan=6mois&label=Plan%206%20Mois%20—%2030%E2%82%AC">Choisir ce plan</a>
-            </div>
-            <div class="price-card">
-                <div class="plan-name">12 Mois</div>
-                <div class="plan-price">45 €</div>
-                <div class="plan-period">Soit 3.75€ / mois</div>
-                <ul class="features-list">
-                    <li>Qualité HD / 4K / 8K</li>
-                    <li>Accès Premium & Catalogue Complet</li>
-                    <li>Support Prioritaire</li>
-                </ul>
-                <a class="cta" href="https://neo4k-site-v2.onrender.com/paiement.html?plan=12mois&label=Plan%2012%20Mois%20—%2045%E2%82%AC">Choisir ce plan</a>
-            </div>
+        <h1>Qualité Premium.<br><span style="color: var(--primary);">Partout.</span></h1>
+        <p>Accédez à vos contenus préférés en Ultra HD. Stabilité garantie, support 24/7 et activation instantanée.</p>
+        <div class="cta-group">
+            <a href="#tarifs" class="btn btn-primary">Voir les offres</a>
+            <a href="https://wa.me/213564653328?text=Bonjour, je souhaite tester le service gratuitement pendant 24h." class="btn btn-secondary">Essai Gratuit 24h</a>
         </div>
     </section>
 
-    <section id="test" class="trial-section">
-        <h2 style="font-size: 28px; margin-bottom: 10px;">Essai Gratuit 24h</h2>
-        <p style="color: var(--text-dim);">Obtenez votre test instantanément sur notre WhatsApp.</p>
-        <div class="trial-form">
-            <a href="https://wa.me/213564653328?text=Bonjour,%20je%20souhaite%20obtenir%20mon%20essai%20gratuit%20de%2024h%20Neo%204K%20Pro." target="_blank" class="trial-btn">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                Discuter sur WhatsApp
-            </a>
+    <section class="plans" id="tarifs">
+        <div class="plan-card">
+            <div class="plan-name">Standard</div>
+            <div class="plan-price">10€<span> / mois</span></div>
+            <ul class="features">
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Accès Premium Complet</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Qualité 4K / Ultra HD</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Support Prioritaire</li>
+            </ul>
+            <a href="paiement.html?plan=1mois&label=Plan 1 Mois" class="plan-btn plan-btn-outline">Choisir ce plan</a>
+        </div>
+
+        <div class="plan-card">
+            <div class="plan-name">Populaire</div>
+            <div class="plan-price">20€<span> / 3 mois</span></div>
+            <ul class="features">
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Accès Premium Complet</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Qualité 4K / Ultra HD</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Support Prioritaire</li>
+            </ul>
+            <a href="paiement.html?plan=3mois&label=Plan 3 Mois" class="plan-btn plan-btn-outline">Choisir ce plan</a>
+        </div>
+
+        <div class="plan-card featured">
+            <div class="featured-badge">Meilleur Choix</div>
+            <div class="plan-name">Premium</div>
+            <div class="plan-price">30€<span> / 6 mois</span></div>
+            <ul class="features">
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Accès Premium Complet</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Qualité 4K / Ultra HD</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Support Prioritaire</li>
+            </ul>
+            <a href="paiement.html?plan=6mois&label=Plan 6 Mois" class="plan-btn plan-btn-fill">Choisir ce plan</a>
+        </div>
+
+        <div class="plan-card">
+            <div class="plan-name">Elite</div>
+            <div class="plan-price">45€<span> / 12 mois</span></div>
+            <ul class="features">
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Accès Premium Complet</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Qualité 4K / Ultra HD</li>
+                <li><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg> Support Prioritaire</li>
+            </ul>
+            <a href="paiement.html?plan=12mois&label=Plan 12 Mois" class="plan-btn plan-btn-outline">Choisir ce plan</a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Neo 4K Pro. Tous droits réservés.</p>
+        <p>&copy; 2026 Neo 4K Pro. Service de divertissement numérique premium.</p>
+        <p style="font-size: 11px; margin-top: 10px; opacity: 0.5;">Tous les paiements sont sécurisés par cryptage SSL.</p>
     </footer>
 </body>
 </html>
